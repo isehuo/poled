@@ -1,6 +1,5 @@
 .DS_Store
 node_modules
 Thumbs.db
-*.bak
-*.log
-.build/
+.git/
+api/
