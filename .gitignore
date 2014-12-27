@@ -26,4 +26,11 @@ plugin.php
 portal.php
 robots.txt
 search.php
+source/admincp/
+source/archiver/
+source/class/
+source/discuz_version.php
+source/index.htm
+source/language/
+source/plugin/
 userapp.php
