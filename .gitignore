@@ -7,6 +7,7 @@ auth/
 archiver/
 config/
 data/
+diy.MD
 uc_client/
 uc_server/
 .htaccess
@@ -26,6 +27,7 @@ plugin.php
 portal.php
 robots.txt
 search.php
+static/
 source/admincp/
 source/archiver/
 source/class/
@@ -33,4 +35,6 @@ source/discuz_version.php
 source/index.htm
 source/language/
 source/plugin/
+template/default/
+template/index.htm
 userapp.php
