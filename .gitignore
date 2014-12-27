@@ -14,7 +14,16 @@ admin.php
 api.php
 connect.php
 crossdomain.xml
+cp.php
+member.php
 favicon.ico
 forum.php
+home.php
+index.php
+group.php
+misc.php
+plugin.php
+portal.php
 robots.txt
+search.php
 userapp.php
