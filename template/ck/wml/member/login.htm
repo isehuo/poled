@@ -1,7 +1,7 @@
 <!--{template common/header}-->
 
 {eval $loginhash = 'L'.random(4);}
-<p><a href="member.php?mod=logging&action=login">{lang login}</a></p>
+<p><a href="member.php?mod=logging&action=login">登录</a></p>
 <p>
     <select name="fastloginfield" id="fastloginfield_{$loginhash}" >
         <option value="username">{lang username}</option>

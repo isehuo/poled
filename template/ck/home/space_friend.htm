@@ -213,7 +213,7 @@
                                             <!--{elseif $_GET['view'] == 'online'}-->
                                                 <!--{date($ols[$value[uid]], 'H:i')}-->
                                             <!--{else}-->
-                                                <a href="home.php?mod=spacecp&ac=friend&op=changenum&uid=$value[uid]&handlekey=hotuserhk_{$value[uid]}" id="friendnum_$value[uid]" onclick="showWindow(this.id, this.href, 'get', 0);" title="{lang hot}">{lang hot}(<span id="spannum_$value[uid]">$value[num]</span>)</a>
+                                                <a href="home.php?mod=spacecp&ac=friend&op=changenum&uid=$value[uid]&handlekey=hotuserhk_{$value[uid]}" id="friendnum_$value[uid]" onclick="showWindow(this.id, this.href, 'get', 0);" title="热度">热度(<span id="spannum_$value[uid]">$value[num]</span>)</a>
                                             <!--{/if}-->
                                             </span>
                                             <a href="home.php?mod=space&uid=$value[uid]"{eval g_color($value[groupid]);}>$value[username]</a>

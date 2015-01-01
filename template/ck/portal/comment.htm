@@ -18,7 +18,7 @@
         <div class="bm vw">
             <div class="h hm">
                 <h1 class="ph"><a href="$url">$csubject[title]</a></h1>
-                <p>{lang comment} ($csubject[commentnum])<!--{if $csubject['allowcomment'] == 1}--><span class="pipe">|</span><a href="javascript:;" onclick="location.href=location.href.replace(/(\#.*)/, '')+'#message';$('message').focus();return false;" class="xi2 xw1">{lang post_comment}</a><!--{/if}--></p>
+                <p>评论 ($csubject[commentnum])<!--{if $csubject['allowcomment'] == 1}--><span class="pipe">|</span><a href="javascript:;" onclick="location.href=location.href.replace(/(\#.*)/, '')+'#message';$('message').focus();return false;" class="xi2 xw1">{lang post_comment}</a><!--{/if}--></p>
             </div>
             <div class="bm_c">
             <!--{loop $commentlist $comment}-->
@@ -46,7 +46,7 @@
                         <input type="hidden" name="aid" value="$id">
                     <!--{/if}-->
                     <input type="hidden" name="formhash" value="{FORMHASH}">
-                    <p class="ptn"><button type="submit" name="commentsubmit" value="true" class="pn"><strong>{lang comment}</strong></button></p>
+                    <p class="ptn"><button type="submit" name="commentsubmit" value="true" class="pn"><strong>评论</strong></button></p>
                 </form>
             <!--{/if}-->
             </div>

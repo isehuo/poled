@@ -166,7 +166,7 @@
                             <a href="home.php?mod=spacecp&ac=blog&blogid=$value[blogid]&op=stick&stickflag=$stickflag&handlekey=stickbloghk_{$value[blogid]}" id="blog_stick_$value[blogid]" onclick="showWindow(this.id, this.href, 'get', 0);"><!--{if $stickflag}-->{lang stick}<!--{else}-->{lang cancel_stick}<!--{/if}--></a>
                             <!--{/if}-->
                         <!--{/if}-->
-                        <!--{if $value['hot']}--><span class="hot">{lang hot} <em>$value[hot]</em> </span><!--{/if}-->
+                        <!--{if $value['hot']}--><span class="hot">热度 <em>$value[hot]</em> </span><!--{/if}-->
                     </dd>
                 </dl>
             <!--{/loop}-->

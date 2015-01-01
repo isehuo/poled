@@ -49,7 +49,7 @@
                                 <!--{if $blog['friend']}-->
                                 <span class="y">{$friendsname[$blog[friend]]}</span>
                                 <!--{/if}-->
-                                <!--{if $blog[hot]}--><strong class="hot">{lang hot} <em>$blog[hot]</em></strong><!--{/if}-->
+                                <!--{if $blog[hot]}--><strong class="hot">热度 <em>$blog[hot]</em></strong><!--{/if}-->
                                 <!--{if $blog['friend']}-->
                                 <span class="y"><a href="home.php?mod=space&uid=$space[uid]&do=$do&view=me&friend=$blog[friend]" class="xg1">{$friendsname[$value[friend]]}</a></span>
                                 <!--{/if}-->
@@ -124,7 +124,7 @@
         
                             <!--{if checkperm('manageblog')}-->
                             IP: $blog[postip]{if $blog[port]}:$blog[port]{/if}<span class="pipe">|</span>
-                            <a href="home.php?mod=spacecp&ac=blog&blogid=$blog[blogid]&op=edithot&handlekey=bloghothk_{$blog[blogid]}" id="blog_hot_$blog[blogid]" onclick="showWindow(this.id, this.href, 'get', 0);">{lang hot}</a><span class="pipe">|</span>
+                            <a href="home.php?mod=spacecp&ac=blog&blogid=$blog[blogid]&op=edithot&handlekey=bloghothk_{$blog[blogid]}" id="blog_hot_$blog[blogid]" onclick="showWindow(this.id, this.href, 'get', 0);">热度</a><span class="pipe">|</span>
                             <!--{/if}-->
                             <!--{if helper_access::check_module('portal')}-->
                                 <!--{if !$blog['friend'] && !$blog['pushedaid'] && (getstatus($_G['member']['allowadmincp'], 2) || $_G['group']['allowmanagearticle'])}-->
@@ -170,9 +170,9 @@
                             <div id="div_main_content" class="mbm">
                                 <h3 class="ptn pbn bbs">
                                     <!--{if !empty($list)}-->
-                                    <a href="home.php?mod=space&uid=$blog[uid]&do=$do&id=$id#quickcommentform_{$id}" onclick="if($('comment_message')){$('comment_message').focus();return false;}" class="y xi2 xw0">{lang publish_comment}</a>
+                                    <a href="home.php?mod=space&uid=$blog[uid]&do=$do&id=$id#quickcommentform_{$id}" onclick="if($('comment_message')){$('comment_message').focus();return false;}" class="y xi2 xw0">发表评论</a>
                                     <!--{/if}-->
-                                    {lang comment} (<span id="comment_replynum">$blog[replynum]</span> {lang blog_replay})
+                                    评论 (<span id="comment_replynum">$blog[replynum]</span> {lang blog_replay})
                                 </h3>
                                 <!--{if $cid}-->
                                 <div class="i">
@@ -201,7 +201,7 @@
                                     <!--{if $_G['uid'] || $_G['group']['allowcomment']}-->
                                         <textarea id="comment_message" onkeydown="ctrlEnter(event, 'commentsubmit_btn');" name="message" rows="3" class="pt"></textarea>
                                     <!--{else}-->
-                                        <div class="pt hm">{lang login_to_comment} <a href="member.php?mod=logging&action=login" onclick="showWindow('login', this.href)" class="xi2">{lang login}</a> | <a href="member.php?mod={$_G[setting][regname]}" class="xi2">$_G['setting']['reglinkname']</a></div>
+                                        <div class="pt hm">{lang login_to_comment} <a href="member.php?mod=logging&action=login" onclick="showWindow('login', this.href)" class="xi2">登录</a> | <a href="member.php?mod={$_G[setting][regname]}" class="xi2">$_G['setting']['reglinkname']</a></div>
                                     <!--{/if}-->
                                 </div>
                             </div>
@@ -216,7 +216,7 @@
                                 <input type="hidden" name="handlekey" value="qcblog_{$id}" />
                                 <input type="hidden" name="commentsubmit" value="true" />
                                 <input type="hidden" name="quickcomment" value="true" />
-                                <button type="submit" name="commentsubmit_btn"value="true" id="commentsubmit_btn" class="pn"{if !$_G[uid]&&!$_G['group']['allowcomment']} onclick="showWindow(this.id, this.form.action);return false;"{/if}><strong>{lang comment}</strong></button>
+                                <button type="submit" name="commentsubmit_btn"value="true" id="commentsubmit_btn" class="pn"{if !$_G[uid]&&!$_G['group']['allowcomment']} onclick="showWindow(this.id, this.form.action);return false;"{/if}><strong>评论</strong></button>
                                 <span id="return_qcblog_{$id}"></span>
                             </p>
                             <input type="hidden" name="formhash" value="{FORMHASH}" />

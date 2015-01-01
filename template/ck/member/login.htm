@@ -20,7 +20,7 @@
                     <a href="member.php?mod={$_G[setting][regname]}" class="xi2">{lang login_guest}</a>
                 </span>
                 <!--{if !$secchecklogin2}-->
-                    <h3 class="xs2">{lang login}</h3>
+                    <h3 class="xs2">登录</h3>
                 <!--{else}-->
                     <h3 class="xs2">{lang login_seccheck2}</h3>
                 <!--{/if}-->
@@ -138,7 +138,7 @@
                         <tr>
                             <th>&nbsp;</th>
                             <td>
-                                <button class="pn pnc" type="submit" name="loginsubmit" value="true" tabindex="1"><strong>{lang login}</strong></button>
+                                <button class="pn pnc" type="submit" name="loginsubmit" value="true" tabindex="1"><strong>登录</strong></button>
                             </td>
                             <td>
                                 <!--{if $this->setting['sitemessage'][login] && empty($_GET['infloat'])}--><a href="javascript:;" id="custominfo_login_$loginhash" class="y">&nbsp;<img src="{IMGDIR}/info_small.gif" alt="{lang faq}" class="vm" /></a><!--{/if}-->

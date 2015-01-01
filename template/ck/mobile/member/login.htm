@@ -2,7 +2,7 @@
 {eval $loginhash = 'L'.random(4);}
 <div class="box"><a href="forum.php">{lang return_forum}</a><span class="pipe">|</span><a href="javascript:history.back();" onclick="javascript:history.back();" title="{lang goback}" >{lang goback}</a></div>
 <div class="bm mtn">
-    <div class="bm_h">{lang login}</div>
+    <div class="bm_h">登录</div>
         <form method="post" action="member.php?mod=logging&action=login&loginsubmit=yes&loginhash=$loginhash&mobile=yes" onsubmit="{if $_G['setting']['pwdsafety']}pwmd5('password3_$loginhash');{/if}" >
         <input type="hidden" name="formhash" id="formhash" value='{FORMHASH}' />
         <input type="hidden" name="referer" id="referer" value="<!--{if dreferer()}-->{echo dreferer()}<!--{else}-->forum.php?mobile=yes<!--{/if}-->" />
@@ -29,7 +29,7 @@
         <!--{/if}-->
     </p>
     <p>
-        <input type="submit" name="submit" id="submit" value="{lang login}" />
+        <input type="submit" name="submit" id="submit" value="登录" />
         <input type="reset" value="{lang reset}" />
     </p>
     <p>

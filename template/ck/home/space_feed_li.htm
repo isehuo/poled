@@ -15,7 +15,7 @@
         <!--{if $value['idtype']=='doid'}-->
         (<a href="javascript:;" {if $_G['uid']}onclick="docomment_get('$value[id]', '$key');"{else}onclick="showWindow(this.id, 'home.php?mod=spacecp&ac=feed', 'get', 0);doane(event);"{/if} id="{$_GET[key]}_do_a_op_$value[id]">{lang reply}</a>)
         <!--{elseif in_array($value['idtype'], array('blogid','picid','sid','eventid'))}-->
-        (<a href="javascript:;" {if $_G['uid']}onclick="feedcomment_get($value[feedid]);"{else}onclick="showWindow(this.id, 'home.php?mod=spacecp&ac=feed', 'get', 0);doane(event);"{/if} id="feedcomment_a_op_$value[feedid]">{lang comment}</a>)
+        (<a href="javascript:;" {if $_G['uid']}onclick="feedcomment_get($value[feedid]);"{else}onclick="showWindow(this.id, 'home.php?mod=spacecp&ac=feed', 'get', 0);doane(event);"{/if} id="feedcomment_a_op_$value[feedid]">评论</a>)
         <!--{/if}-->
         <!--{/if}-->
 

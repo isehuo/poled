@@ -6,7 +6,7 @@
 <header class="header">
     <div class="nav">
         <a href="javascript:;" onclick="history.go(-1)" class="z"><img src="{STATICURL}image/mobile/images/icon_back.png" /></a>
-        <span>{lang login}</span>
+        <span>登录</span>
     </div>
 </header>
 <!-- header end -->
@@ -18,7 +18,7 @@
 <!-- userinfo start -->
 <div class="loginbox <!--{if $_GET[infloat]}-->login_pop<!--{/if}-->">
     <!--{if $_GET[infloat]}-->
-        <h2 class="log_tit"><a href="javascript:;" onclick="popup.close();"><span class="icon_close y">&nbsp;</span></a>{lang login}</h2>
+        <h2 class="log_tit"><a href="javascript:;" onclick="popup.close();"><span class="icon_close y">&nbsp;</span></a>登录</h2>
     <!--{/if}-->
         <form id="loginform" method="post" action="member.php?mod=logging&action=login&loginsubmit=yes&loginhash=$loginhash&mobile=2" onsubmit="{if $_G['setting']['pwdsafety']}pwmd5('password3_$loginhash');{/if}" >
         <input type="hidden" name="formhash" id="formhash" value='{FORMHASH}' />
@@ -58,7 +58,7 @@
         <!--{subtemplate common/seccheck}-->
         <!--{/if}-->
     </div>
-    <div class="btn_login"><button tabindex="3" value="true" name="submit" type="submit" class="formdialog pn pnc"><span>{lang login}</span></button></div>
+    <div class="btn_login"><button tabindex="3" value="true" name="submit" type="submit" class="formdialog pn pnc"><span>登录</span></button></div>
     </form>
     <!--{if $_G['setting']['connect']['allow'] && !$_G['setting']['bbclosed']}-->
     <p>{lang useqqconnectlogin}</p>
