@@ -18,107 +18,22 @@ $picid = empty($_GET['picid'])?0:intval($_GET['picid']);
 $page = empty($_GET['page'])?1:intval($_GET['page']);
 if($page<1) $page=1;
 
-if($id) {
-	$perpage = 20;
-	$perpage = mob_perpage($perpage);
-
-	$start = ($page-1)*$perpage;
-
-	ckstart($start, $perpage);
-
-	if($id > 0) {
-		$album = C::t('home_album')->fetch($id, $space['uid']);
-		if(empty($album)) {
-			showmessage('to_view_the_photo_does_not_exist');
-		}
-
-		ckfriend_album($album);
-
-
-		$album['picnum'] = $count = C::t('home_pic')->check_albumpic($id);
-
-		if(empty($count) && !$space['self']) {
-			C::t('home_album')->delete($id);
-			showmessage('to_view_the_photo_does_not_exist', "home.php?mod=space&uid=$album[uid]&do=album&view=me");
-		}
-
-		if($album['catid']) {
-			$album['catname'] = C::t('home_album_category')->fetch_catname_by_catid($album['catid']);
-			$album['catname'] = dhtmlspecialchars($album['catname']);
-		}
-
-	} else {
-		$count = C::t('home_pic')->check_albumpic(0, NULL, $space['uid']);
-
-		$album = array(
-			'uid' => $space['uid'],
-			'albumid' => -1,
-			'albumname' => lang('space', 'default_albumname'),
-			'picnum' => $count
-		);
-	}
-
-	$albumlist = array();
-	$maxalbum = $nowalbum = $key = 0;
-	$query = C::t('home_album')->fetch_all_by_uid($space['uid'], 'updatetime', 0, 100);
-	foreach($query as $value) {
-		if($value['friend'] != 4 && ckfriend($value['uid'], $value['friend'], $value['target_ids'])) {
-			$value['pic'] = pic_cover_get($value['pic'], $value['picflag']);
-		} elseif ($value['picnum']) {
-			$value['pic'] = STATICURL.'image/common/nopublish.gif';
-		} else {
-			$value['pic'] = '';
-		}
-		$albumlist[$key][$value['albumid']] = $value;
-		$key = count($albumlist[$key]) == 5 ? ++$key : $key;
-	}
-	$maxalbum = count($albumlist);
-
-	$list = array();
-	$pricount = 0;
-	if($count) {
-		$query = C::t('home_pic')->fetch_all_by_albumid($id, $start, $perpage, 0, 0, 1, $space['uid']);
-		foreach($query as $value) {
-			if($value['status'] == 0 || $value['uid'] == $_G['uid'] || $_G['adminid'] == 1) {
-				$value['pic'] = pic_get($value['filepath'], 'album', $value['thumb'], $value['remote']);
-				$list[] = $value;
-			} else {
-				$pricount++;
-			}
+if ($picid || $id) {
+	if(!$picid){
+		$query = C::t('home_pic')->fetch_all_by_sql("p.albumid = ".$id, "p.dateline desc", 0, 1, 0 , 0);
+		if(count($query)){
+			$picid = $query[0]['picid'];
+		}else{
+			exit();
 		}
 	}
-	$multi = multi($count, $perpage, $page, "home.php?mod=space&uid=$album[uid]&do=$do&id=$id#comment");
 
-	$actives = array('me' =>' class="a"');
+	$pic = C::t('home_pic')->fetch_by_id_idtype($picid);
 
-	$_G['home_css'] = 'album';
-
-	$diymode = intval($_G['cookie']['home_diymode']);
-
-	$seodata = array('album' => $album['albumname'], 'user' => $album['username'], 'depict' => $album['depict']);
-	list($navtitle, $metadescription, $metakeywords) = get_seosetting('album', $seodata);
-	if(empty($navtitle)) {
-		$navtitle = $album['albumname'].' - '.lang('space', 'sb_album', array('who' => $album['username']));
-		$nobbname = false;
-	} else {
-		$nobbname = true;
-	}
-	if(empty($metakeywords)) {
-		$metakeywords = $album['albumname'];
-	}
-	if(empty($metadescription)) {
-		$metadescription = $album['albumname'];
-	}
-
-	include_once template("diy:home/space_album_view");
-
-} elseif ($picid) {
-	$query = C::t('home_pic')->fetch_all_by_uid($space['uid'], 0, 1, $picid);
-	$pic = $query[0];
-	if(!$pic || ($pic['status'] == 1 && $pic['uid'] != $_G['uid'] && $_G['adminid'] != 1 && $_GET['modpickey'] != modauthkey($pic['picid']))) {
+	if(!$pic || ($pic['status'] == 1 && $_GET['modpickey'] != modauthkey($pic['picid']))) {
 		showmessage('view_images_do_not_exist');
 	}
-
+	
 	$picid = $pic['picid'];
 	$theurl = "home.php?mod=space&uid=$pic[uid]&do=$do&picid=$picid";
 
@@ -127,6 +42,11 @@ if($id) {
 		$album = C::t('home_album')->fetch($pic['albumid']);
 		if(!$album) {
 			C::t('home_pic')->update_for_albumid($pic['albumid'], array('albumid' => 0));
+		}
+		
+		if($album['catid'] && !$album['catname']) {
+			$album['catname'] = C::t('home_album_category')->fetch_catname_by_catid($album['catid']);
+			$album['catname'] = dhtmlspecialchars($album['catname']);
 		}
 	}
 
@@ -139,15 +59,15 @@ if($id) {
 
 	$piclist = $list = $keys = array();
 	$keycount = 0;
-	$query = C::t('home_pic')->fetch_all_by_albumid($pic['albumid'], 0, 0, 0, 0, 1, $space['uid']);
+	$query = C::t('home_pic')->fetch_all_by_sql("albumid = ".$pic['albumid'], "dateline desc", 0, 0, 0, 0);
+	
 	foreach($query as $value) {
-		if($value['status'] == 0 || $value['uid'] == $_G['uid'] || $_G['adminid'] == 1) {
+		if($value['status'] == 0) {
 			$keys[$value['picid']] = $keycount;
 			$list[$keycount] = $value;
 			$keycount++;
 		}
 	}
-
 	$upid = $nextid = 0;
 	$nowkey = $keys[$picid];
 	$endkey = $keycount - 1;
@@ -191,13 +111,6 @@ if($id) {
 
 	$pic['pic'] = pic_get($pic['filepath'], 'album', $pic['thumb'], $pic['remote'], 0);
 	$pic['size'] = formatsize($pic['size']);
-
-	$exifs = array();
-	$allowexif = function_exists('exif_read_data');
-	if(isset($_GET['exif']) && $allowexif) {
-		require_once libfile('function/exif');
-		$exifs = getexif($pic['pic']);
-	}
 
 	$perpage = 20;
 	$perpage = mob_perpage($perpage);
@@ -262,11 +175,28 @@ if($id) {
 	}
 	$metakeywords = $pic['title'] ? $pic['title'] : $album['albumname'];
 	$metadescription = $pic['title'] ? $pic['title'] : $albumname['albumname'];
+	
 
-	include_once template("diy:home/space_album_pic");
+	include_once template("diy:photo/album_pic");
 
+	// $albumlist = array();
+	// $maxalbum = $nowalbum = $key = 0;
+	// $query = C::t('home_album')->fetch_all_by_uid(0, 'updatetime', 0, 100);
+	// foreach($query as $value) {
+	// 	if($value['friend'] != 4 && ckfriend($value['uid'], $value['friend'], $value['target_ids'])) {
+	// 		$value['pic'] = pic_cover_get($value['pic'], $value['picflag']);
+	// 	} elseif ($value['picnum']) {
+	// 		$value['pic'] = STATICURL.'image/common/nopublish.gif';
+	// 	} else {
+	// 		$value['pic'] = '';
+	// 	}
+	// 	$albumlist[$key][$value['albumid']] = $value;
+	// 	$key = count($albumlist[$key]) == 5 ? ++$key : $key;
+	// }
+	// $maxalbum = count($albumlist);
+
+	
 } else {
-
 	loadcache('albumcategory');
 	$category = $_G['cache']['albumcategory'];
 
@@ -285,15 +215,10 @@ if($id) {
 	$pricount = 0;
 	$picmode = 0;
 
-	if(empty($_GET['view'])) {
-		$_GET['view'] = 'we';
-	}
-
 	$gets = array(
 		'mod' => 'space',
 		'uid' => $space['uid'],
 		'do' => 'album',
-		'view' => $_GET['view'],
 		'catid' => $_GET['catid'],
 		'order' => $_GET['order'],
 		'fuid' => $_GET['fuid'],
@@ -305,69 +230,33 @@ if($id) {
 
 	$need_count = true;
 
-	if($_GET['view'] == 'all') {
 
-		$wheresql = '1';
+	$wheresql = '1';
 
-		if($_GET['order'] == 'hot') {
-			$orderactives = array('hot' => ' class="a"');
-			$picmode = 1;
-			$need_count = false;
+	if($_GET['order'] == 'hot') {
+		$orderactives = array('hot' => ' class="a"');
+		$picmode = 1;
+		$need_count = false;
 
-			$ordersql = 'p.dateline';
+		$ordersql = 'p.dateline';
 
-			$count = C::t('home_pic')->fetch_all_by_sql('p.'.DB::field('hot', $minhot, '>='), '', 0, 0, 1);
-			if($count) {
-				$query = C::t('home_pic')->fetch_all_by_sql('p.'.DB::field('hot', $minhot, '>='), 'p.dateline DESC', $start, $perpage);
-				foreach($query as $value) {
-					if($value['friend'] != 4 && ckfriend($value['uid'], $value['friend'], $value['target_ids']) && ($value['status'] == 0 || $value['uid'] == $_G['uid'] || $_G['adminid'] == 1)) {
-						$value['pic'] = pic_get($value['filepath'], 'album', $value['thumb'], $value['remote']);
-						$list[] = $value;
-					} else {
-						$pricount++;
-					}
+		$count = C::t('home_pic')->fetch_all_by_sql('p.'.DB::field('hot', $minhot, '>='), '', 0, 0, 1);
+		if($count) {
+			$query = C::t('home_pic')->fetch_all_by_sql('p.'.DB::field('hot', $minhot, '>='), 'p.dateline DESC', $start, $perpage);
+			foreach($query as $value) {
+				if($value['friend'] != 4 && ckfriend($value['uid'], $value['friend'], $value['target_ids']) && ($value['status'] == 0 || $value['uid'] == $_G['uid'] || $_G['adminid'] == 1)) {
+					$value['pic'] = pic_get($value['filepath'], 'album', $value['thumb'], $value['remote']);
+					$list[] = $value;
+				} else {
+					$pricount++;
 				}
 			}
-
-		} else {
-			$orderactives = array('dateline' => ' class="a"');
-		}
-
-	} elseif($_GET['view'] == 'we') {
-
-		space_merge($space, 'field_home');
-
-		$uids = array();
-
-		if($space['feedfriend']) {
-
-			$uids = explode(',', $space['feedfriend']);
-			$f_index = 'updatetime';
-
-			$fuid_actives = array();
-
-			require_once libfile('function/friend');
-			$fuid = intval($_GET['fuid']);
-			if($fuid && friend_check($fuid)) {
-				$uids = array($fuid);
-				$f_index = '';
-				$fuid_actives = array($fuid=>' selected');
-			}
-
-			$query = C::t('home_friend')->fetch_all_by_uid($space['uid'], 0, 500, true);
-			foreach($query as $value) {
-				$userlist[] = $value;
-			}
-		} else {
-			$need_count = false;
 		}
 
 	} else {
-
-		if($_GET['from'] == 'space') $diymode = 1;
-
-		$uids = array($space['uid']);
+		$orderactives = array('dateline' => ' class="a"');
 	}
+
 
 	if($need_count) {
 
@@ -400,13 +289,7 @@ if($id) {
 	dsetcookie('home_diymode', $diymode);
 
 	if($_G['uid']) {
-		if($_GET['view'] == 'all') {
-			$navtitle = lang('core', 'title_view_all').lang('core', 'title_album');
-		} elseif($_GET['view'] == 'me') {
-			$navtitle = lang('core', 'title_my_album');
-		} else {
-			$navtitle = lang('core', 'title_friend_album');
-		}
+		$navtitle = lang('core', 'title_view_all').lang('core', 'title_album');
 	} else {
 		if($_GET['order'] == 'hot') {
 			$navtitle = lang('core', 'title_hot_pic_recommend');
@@ -420,7 +303,7 @@ if($id) {
 
 	$metakeywords = $navtitle;
 	$metadescription = $navtitle;
-	include_once template("diy:home/space_album_list");
+	include_once template("diy:photo/album_list");
 }
 
 function ckfriend_album($album) {

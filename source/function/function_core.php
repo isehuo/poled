@@ -821,7 +821,6 @@ function libfile($libname, $folder = '') {
 	} else {
 		$path = "{$libpath}/{$libname}";
 	}
-	// print(realpath(DISCUZ_ROOT.$path.'.php'));
 	return preg_match('/^[\w\d\/_]+$/i', $path) ? realpath(DISCUZ_ROOT.$path.'.php') : false;
 }
 
