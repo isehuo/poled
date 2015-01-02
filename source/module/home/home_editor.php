@@ -21,8 +21,8 @@ if (empty($_GET['op'])) {
 		<head>
 			<meta http-equiv="Content-Type" content="text/html;charset=<?php echo $_GET['charset']; ?>" />
 			<title>Editor</title>
-			<script type="text/javascript" src="static/js/common.js"></script>
-			<script type="text/javascript" src="static/js/home.js"></script>
+			<script type="text/javascript" src="<?php echo $_G["setting"]["jspath"] ?>common.js"></script>
+			<script type="text/javascript" src="<?php echo $_G["setting"]["jspath"] ?>home.js"></script>
 			<script language="javascript" src="static/image/editor/editor_base.js"></script>
 			<style type="text/css">
 				body{margin:0;padding:0;}
