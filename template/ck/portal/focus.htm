@@ -1,85 +1,33 @@
 <div id="banner" class=" hidden-xs">
     <ul id="banner_img">
-        <li class="i0">
-            <div class="container">
-                <div class="ba_txt">
-                    <h2>专注教育行业生态圈</h2>
-                    <p>
-                        为早教、幼教、成教量身定做<br />
-                        与行业团体、领袖精诚合作，保障我们的系统符合行业现在与未来<br />
-                        基于互联网思维管理教育机构
-                    </p>
-                </div>
-                <div class="ba_img">
-                    <img data-src="static/pic/banner/crm.png" width="600" height="320" alt="互联CMR专注教育行业生态圈" class="lazy" />
-                </div>
-            </div>
-        </li>
-        <li class="i1">
-            <div class="container">
-                <div class="ba_txt">
-                    <h2>强力数据安全保障</h2>
-                    <p>
-                        原360的安全专家加盟，架构系统底层<br />
-                        阿里云系统级支持，保障网络环境安全<br />
-                        多项加密与防护，您的数据您才能做主
-                    </p>
-                </div>
-                <div class="ba_img">
-                    <img data-src="static/pic/banner/security.png" width="500" height="320" alt="互联CMR强力保障数据安全" class="lazy" />
-                </div>
-            </div>
-        </li>
-        <li class="i2">
-            <div class="container">
-                <div class="ba_txt">
-                    <h2>大数据 做大教育</h2>
-                    <p>
-                        多维度 高精准报表为BOSS决策提供依据<br />
-                        多样本记录分析 智能业务预警
-                    </p>
-                    
-                </div>
-                <div class="ba_img">
-                    <img data-src="static/pic/banner/data.png" width="500" height="320" alt="互联CRM用大数据帮您做大教育" class="lazy" />
-                </div>
-            </div>
-        </li>
-        <li class="i3">
-            <div class="container">
-                <div class="ba_txt">
-                    <h2>不只是一套软件系统</h2>
-                    <p>
-                        随时随地 无处不在的网络移动办公<br />
-                        7*24服务在线服务人员支持<br />
-                        与机构用户一起 不断完善系统 周周更新
-                    </p>
-                </div>
-                <div class="ba_img">
-                    <img data-src="static/pic/banner/me.png" width="500" height="320" alt="您的网站全职管家" class="lazy" />
-                </div>
-            </div>
-        </li>
+        <!--{loop $fe_focuslist $key $value}-->
+            <li style="background-color:$value[bgcolor]">
+              <div class="container">
+                  <div class="ba_txt">
+                      <h2>$value[title] 2222</h2>
+                      $value[desc]
+                  </div>
+                  <div class="ba_img">
+                      <img data-src="$value[pic]" width="600" height="320" alt="$value[title]" class="lazy" src="$value[pic]" />
+                  </div>
+              </div>
+          </li>
+        <!--{/loop}-->
     </ul>
     <div id="banner_ctr">
         <div id="drag_ctr"></div>
         <ul class="ba_ctr">
-            <li class="ctr0"></li>
-            <li class="ctr1"></li>
-            <li class="ctr2"></li>
-            <li class="ctr3"></li>
+            <!--{loop $fe_focuslist $key $value}-->
+            <li class="ctr$key"></li>
+            <!--{/loop}-->
         </ul>
     </div>
 </div>
 <style>
-#banner { width: 100%; height:440px;overflow: hidden; position: relative; margin-bottom:35px;}
+#banner { width: 100%; height:360px;overflow: hidden; position: relative; margin-bottom:35px;}
 #banner_img {display: block; position: relative; height:100%;}
     #banner_img li { position: absolute; top:0; left: 0; width: 100%;height: 100%; background-position: center; background-size: cover; display: none; }
         /*设置背景图片-------开始*/
-        #banner_img .i0{ background-color:#05b8e0;}
-        #banner_img .i1{ background-color:#ff6600; }
-        #banner_img .i2{ background-color:#0288ce; }
-        #banner_img .i3{ background-color:#669900; }
     /*设置背景图片--------结束*/
     .ba_img { position: absolute; left: 60%; top: 40px; width: 506px; height: 404px; margin-left:3%}
         /*.ba_img img{-webkit-transition:-webkit-transform 4s linear;transition:transform 4s linear;-webkit-transform:scaleX(1.05) scaleY(1.05);-ms-transform:scaleX(1.05) scaleY(1.05);transform:scaleX(1.05) scaleY(1.05)}

@@ -590,9 +590,8 @@ CSS 写作注意事项：
             #hd .fastlg { padding-top: 10px; }
 
             #scbar { overflow: hidden; height: 42px; line-height: 42px;float:left;}
-                .scbar_icon_td { width: 21px; background: url(/static/image/common/search.png) no-repeat 0 -50px; }
                 .scbar_txt_td, .scbar_type_td { background: url(/static/image/common/search.png) repeat-x 0 -93px; }
-                    #scbar_txt { width: 400px; border: 1px solid #FFF; outline: none; }
+                    #scbar_txt { width: 200px; border: 1px solid #FFF; outline: none; }
                     .scbar_narrow #scbar_txt { width: 260px; }
                 .scbar_btn_td { width: 38px; background: url(/static/image/common/search.png) no-repeat 8px -142px; }
                     #scbar_btn { margin: 0; padding: 0; border: none; background: transparent none; box-shadow: none; }
