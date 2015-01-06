@@ -1,8 +1,5 @@
 <!--{if $_G['uid']}-->
-
     <span class="vwmy{if $_G['setting']['connect']['allow'] && $_G[member][conisbind]} qq{/if}"><a href="home.php?mod=space&uid=$_G[uid]" title="{lang visit_my_space}" id="myitem" class="showmenu" onmouseover="showMenu({'ctrlid':'myitem'});">{$_G[member][username]}</a></span>
-    <!--{hook/global_usernav_extra1}-->
-    <!--{hook/global_usernav_extra4}-->
     <!--{if ($_G['group']['allowmanagearticle'] || $_G['group']['allowpostarticle'] || $_G['group']['allowdiy'] || getstatus($_G['member']['allowadmincp'], 4) || getstatus($_G['member']['allowadmincp'], 6) || getstatus($_G['member']['allowadmincp'], 2) || getstatus($_G['member']['allowadmincp'], 3))}-->
         <a href="portal.php?mod=portalcp"><!--{if $_G['setting']['portalstatus'] }-->{lang portal_manage}<!--{else}-->{lang portal_block_manage}<!--{/if}--></a>
     <!--{/if}-->
@@ -12,15 +9,14 @@
     <!--{if $_G['uid'] && getstatus($_G['member']['allowadmincp'], 1)}-->
         <a href="admin.php" target="_blank">{lang admincp}</a>
     <!--{/if}-->
-    <!--{hook/global_usernav_extra2}--> <!--{hook/global_usernav_extra3}-->
 <!--{elseif !empty($_G['cookie']['loginuser'])}-->
     <strong><a id="loginuser" class="noborder"><!--{echo dhtmlspecialchars($_G['cookie']['loginuser'])}--></a></strong>
     <a href="member.php?mod=logging&action=login" onclick="showWindow('login', this.href)">{lang activation}</a>
-    <a href="member.php?mod=logging&action=logout&formhash={FORMHASH}">退出</a>
+    <a href="member.php?mod=logging&action=logout&formhash={FORMHASH}">{lang logout}</a>
 <!--{elseif !$_G[connectguest]}-->
     <!--{template member/login_simple}-->
 <!--{else}-->
     <strong class="vwmy qq">{$_G[member][username]}($_G[group][grouptitle])</strong>
     <!--{hook/global_usernav_extra1}-->
-    <a href="member.php?mod=logging&action=logout&formhash={FORMHASH}">退出</a>
+    <a href="member.php?mod=logging&action=logout&formhash={FORMHASH}">{lang logout}</a>
 <!--{/if}-->

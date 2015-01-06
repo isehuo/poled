@@ -39,7 +39,6 @@
                 <span><a href="javascript:;" id="shortcutcloseid" title="{lang close}">{lang close}</a></span>
                 {lang shortcut_notice}
                 <a href="javascript:;" id="shortcuttip">{lang shortcut_add}</a>
-
             </div>
             <script type="text/javascript">setTimeout(setShortcut, 2000);</script>
         <!--{/if}-->
@@ -53,7 +52,6 @@
                 <div class="y">
                     <!--{template common/header_userstatus}-->
                     
-
                     <!--{hook/global_cpnav_extra2}-->
                     <!--{loop $_G['setting']['topnavs'][1] $nav}-->
                         <!--{if $nav['available'] && (!$nav['level'] || ($nav['level'] == 1 && $_G['uid']) || ($nav['level'] == 2 && $_G['adminid'] > 0) || ($nav['level'] == 3 && $_G['adminid'] == 1))}-->$nav[code]<!--{/if}-->
@@ -94,8 +92,8 @@
         </div>
         <!--{hook/global_header}-->
     <!--{/if}-->
-    <!-- if CURMODULE == 'portalcp' && $ac == "index" -->
-    <!--{if CURMODULE == 'index'}-->
-    <!--{subtemplate portal/focus}-->
+    <!--{if CURSCRIPT == "portal" && CURMODULE == 'index'}-->
+        <script type="text/javascript" src="{$_G[setting][jspath]}jquery.1.9.1.js"></script>
+        <!--{subtemplate portal/focus}-->
     <!--{/if}-->
     <div id="wp" class="wp">
