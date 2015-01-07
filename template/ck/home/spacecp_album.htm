@@ -36,49 +36,9 @@
                         <th>{lang site_categories}</th>
                         <td>
                             $categoryselect
-                            ({lang select_site_album_categories})
                         </td>
                     </tr>
                     <!--{/if}-->
-                    <tr>
-                        <th>{lang privacy_settings}</th>
-                        <td>
-                            <select name="friend" onchange="passwordShow(this.value);" class="ps">
-                                <option value="0"$friendarr[0]>{lang friendname_0}</option>
-                                <option value="1"$friendarr[1]>{lang friendname_1}</option>
-                                <option value="2"$friendarr[2]>{lang friendname_2}</option>
-                                <option value="3"$friendarr[3]>{lang friendname_3}</option>
-                                <option value="4"$friendarr[4]>{lang friendname_4}</option>
-                            </select>
-                        </td>
-                    </tr>
-                    <tbody id="span_password" style="$passwordstyle">
-                        <tr>
-                            <th>{lang password}</th>
-                            <td><input type="text" name="password" value="$album[password]" size="10" class="px" /></td>
-                        </tr>
-                    </tbody>
-                    <tbody id="tb_selectgroup" style="$selectgroupstyle">
-                        <tr>
-                            <th>{lang specified_friends}</th>
-                            <td>
-                                <select name="selectgroup" onchange="getgroup(this.value);" class="ps">
-                                    <option value="">{lang from_friends_group}</option>
-                                    <!--{loop $groups $key $value}-->
-                                    <option value="$key">$value</option>
-                                    <!--{/loop}-->
-                                </select>
-                                <p class="d">{lang choices_following_friends_list}</p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>&nbsp;</th>
-                            <td>
-                                <textarea name="target_names" id="target_names" rows="3" class="pt">$album[target_names]</textarea>
-                                <p class="d">{lang friend_name_space}</p>
-                            </td>
-                        </tr>
-                    </tbody>
                     <tr>
                         <th>&nbsp;</th>
                         <td>

@@ -3,8 +3,7 @@
     <form method="post" autocomplete="off" id="lsform" action="member.php?mod=logging&action=login&loginsubmit=yes&infloat=yes&lssubmit=yes" onsubmit="{if $_G['setting']['pwdsafety']}pwmd5('ls_password');{/if}return lsSubmit();">
     <div class="fastlg cl">
         <span id="return_ls" style="display:none"></span>
-        <a href="member.php?mod=logging&action=login&referer={echo rawurlencode($dreferer)}" onclick="showWindow('login', this.href);return false;" class="xi2">{lang login}</a><a href="member.php?mod={$_G[setting][regname]}">{lang register}</a>
-        <!--{hook/global_login_extra}-->
+        <a href="member.php?mod=logging&action=login&referer={echo rawurlencode($dreferer)}" onclick="showWindow('login', this.href);return false;" class="xi2">登录</a><a href="member.php?mod={$_G[setting][regname]}">注册</a>
     </div>
     </form>
 

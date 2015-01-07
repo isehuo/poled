@@ -575,32 +575,29 @@ CSS 写作注意事项：
 /* 通用容器，定义页面宽度 */ .wp { margin: 0 auto; width: 960px; } #wp .wp { width: auto; }
 
 /* 页头 */
-    #toptb { min-width: 960px; border-bottom: 1px solid #CDCDCD; background: #f2f2f2; line-height: 28px; }
-        #toptb a { float: left; padding: 0 4px; height: 28px; }
+    #toptb { min-width: 960px; background-color: #4db1cb; line-height:36px; color:#b9feff; }
+        #toptb a { float: left; padding: 0 4px; height:36px; }
+        #toptb a,#toptb a:visited{color:#b9feff; }
         #toptb a.showmenu { padding-right: 15px; }
-        #toptb a.hover { background-color: #FFF; }
-        #toptb .pipe { float: left; display: none; }
+        #toptb a.showmenu img{height:28px;width:28px;border-radius:15px;border:1px solid #fff;float:left;margin:3px 5px 0 0;}
+        #toptb .pipe { float: left;color:#7cdef9;}
         #toptb .vwmy{float: left;}
 
-        #hd .wp { padding: 10px 0 0; }
-
-            .hdc { min-height: 70px; float:left;}
-            #hd h2 { padding: 0 20px 8px 0; float: left; }
-                #space #hd h2 { margin-top: 0; }
+        #hd{height:40px;padding:15px 0;}
+            #hd h2 {float: left;}
             #hd .fastlg { padding-top: 10px; }
 
-            #scbar { overflow: hidden; height: 42px; line-height: 42px;float:left;}
-                .scbar_txt_td, .scbar_type_td { background: url(/static/image/common/search.png) repeat-x 0 -93px; }
-                    #scbar_txt { width: 200px; border: 1px solid #FFF; outline: none; }
+            #scbar { overflow: hidden; height:30px; line-height:28px;float:right;}
+                .scbar_icon_td { width: 21px; }
+                .scbar_txt_td { border:1px solid #ccc;float:left;border-right:none;}
+                    #scbar_txt { width:100px; border: 1px solid #FFF; outline: none; }
                     .scbar_narrow #scbar_txt { width: 260px; }
-                .scbar_btn_td { width: 38px; background: url(/static/image/common/search.png) no-repeat 8px -142px; }
-                    #scbar_btn { margin: 0; padding: 0; border: none; background: transparent none; box-shadow: none; }
-                        #scbar_btn strong { line-height: 84px; }
-                .scbar_type_td { width: 61px; background: url(/static/image/common/search.png) no-repeat 0 -193px; }
+                    #scbar_btn { margin: 0; padding: 0; border:1px solid #eee;box-shadow: none;border:1px solid #ccc;border-left:none;background-color:#f0f0f0;height:30px;padding:0 8px;cursor:pointer;}
+
                     #scbar_type { display: block; padding-left: 10px; text-align: left; text-decoration: none; }
                         #scbar_type_menu { margin-top: -8px; }
-            #nv { overflow: hidden; height: 33px; float:left;}
-                #nv li { float: left; padding-right: 1px; height: 33px; line-height: 33px; font-weight: 700; font-size: 14px; }
+            #nv { overflow: hidden;float:left; line-height:40px;margin-left:40px;}
+                #nv li { float: left; padding-right: 1px; font-size: 14px; }
                     #nv li a { float: left; padding: 0 15px; height: 33px; }
             #mu { position: relative; z-index: 1; }
 
@@ -610,8 +607,7 @@ CSS 写作注意事项：
                             #mu a:hover { margin: 4px 5px; border: 1px solid #C2D5E3; background: #E5EDF2; color: #369; text-decoration: none; }
                 .floatmu { position: absolute; left: 0; top: 0; }
             
-                .vwmy { padding-left: 10px; background: url(/static/image/common/user_online.gif) no-repeat 0 10px; }
-                    .vwmy.qq { background: url(/static/image/common/connect_qq.gif) no-repeat scroll 0 0; padding-left: 20px; }
+                .vwmy.qq { background: url(/static/image/common/connect_qq.gif) no-repeat scroll 0 0; padding-left: 20px; }
                 /* .topnav .new, .sch .new 分别为为个人中心和搜索页面头部新消息样式 */
                 .topnav .new, .sch .new, #toptb .new { padding-left: 20px; background-repeat: no-repeat; background-position: 0 50%; color: #369; font-weight: 700; }
                     #myprompt.new { background-image: url(/static/image/common/notice.gif); background-position: 3px 50%; }
