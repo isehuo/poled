@@ -598,7 +598,9 @@ CSS 写作注意事项：
                         #scbar_type_menu { margin-top: -8px; }
             #nv { overflow: hidden;float:left; line-height:40px;margin-left:40px;}
                 #nv li { float: left; padding-right: 1px; font-size: 14px; }
+
                     #nv li a { float: left; padding: 0 15px; height: 33px; }
+                    #nv li.a a{border-bottom:1px solid #ccc;}
             #mu { position: relative; z-index: 1; }
 
                 #mu ul { background: url(/static/image/common/mu_bg.png) no-repeat 0 100%; line-height: 22px; z-index: 2; font-size: 12px; }
