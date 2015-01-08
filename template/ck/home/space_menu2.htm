@@ -5,7 +5,7 @@
         <!--{if helper_access::check_module('follow')}-->
         <li{if CURMODULE == 'follow'} class="a"{/if}><a href="home.php?mod=follow&uid=$space[uid]&do=view&from=space">{lang follow}</a></li>
         <!--{/if}-->
-        <li{if $do=='thread'} class="a"{/if}><a href="home.php?mod=space&uid=$space[uid]&do=thread&view=me&from=space">{lang topic}</a></li>
+        <!--li{if $do=='thread'} class="a"{/if}><a href="home.php?mod=space&uid=$space[uid]&do=thread&view=me&from=space">{lang topic}</a></li-->
         <!--{if helper_access::check_module('blog')}-->
         <li{if $do=='blog'} class="a"{/if}><a href="home.php?mod=space&uid=$space[uid]&do=blog&view=me&from=space">{lang blog}</a></li>
         <!--{/if}-->

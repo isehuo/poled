@@ -65,10 +65,13 @@
                             <table cellspacing="0" cellpadding="0" class="tfm">
                                 <!--{if $_G['setting']['albumcategorystat'] && $categoryselect}-->
                                 <tr>
-                                    <th>{lang site_categories}</th>
+                                    <th>分类 $space[extgroupids]</th>
                                     <td>
-                                        $categoryselect
-                                        <p class="d">{lang select_site_album_categories}</p>
+                                        <!--{if $_G['adminid'] == 1 || $space[groupid]== 27}-->
+                                            $categoryselect
+                                        <!--{else}-->
+                                            <select class="ps vm" name="catid" id="catid"><option value="1">自拍</option></select>
+                                        <!--{/if}-->
                                     </td>
                                 </tr>
                                 <!--{/if}-->

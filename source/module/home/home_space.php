@@ -11,9 +11,8 @@ if(!defined('IN_DISCUZ')) {
 	exit('Access Denied');
 }
 
-$dos = array('index', 'doing', 'blog', 'album', 'friend', 'wall',
-	'notice', 'share', 'home', 'pm', 'videophoto', 'favorite',
-	'thread', 'trade', 'poll', 'activity', 'debate', 'reward', 'profile', 'plugin', 'follow');
+// $dos = array('index', 'doing', 'blog', 'album', 'friend', 'wall', 'notice', 'share', 'home', 'pm', 'videophoto', 'favorite', 'thread', 'trade', 'poll', 'activity', 'debate', 'reward', 'profile', 'plugin', 'follow');
+$dos = array('index', 'album', 'wall', 'notice', 'home', 'pm', 'favorite', 'poll', 'profile', 'plugin', 'follow');
 
 $do = (!empty($_GET['do']) && in_array($_GET['do'], $dos))?$_GET['do']:'index';
 
