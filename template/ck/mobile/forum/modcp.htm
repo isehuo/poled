@@ -7,11 +7,11 @@
         <p class="notice">{lang mod_notice}</p>
     </div>
 <!--{elseif !empty($modtpl)}-->
-    <!--{if in_array($script, array('member', 'login'))}-->
-        <!--{eval include(template($modtpl));}-->
+	<!--{if in_array($script, array('member', 'login'))}-->
+    	<!--{eval include(template($modtpl));}-->
     <!--{else}-->
-        <div class="box ban pbn">
-            {lang admin_threadtopicadmin_error}
+    	<div class="box ban pbn">
+    		{lang admin_threadtopicadmin_error}
         </div>
     <!--{/if}-->
 <!--{/if}-->

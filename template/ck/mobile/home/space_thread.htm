@@ -1,16 +1,16 @@
 <!--{template common/header}-->
 <div class="box"><a href="{if $forcefid}forum.php?mod=forumdisplay{$forcefid}{else}forum.php{/if}" title="{lang return_forum}">{lang return_forum}</a></div>
 <div class="bm mtn">
-    <div class="bm_h">
-        {lang my_posts}
+	<div class="bm_h">
+    	{lang my_posts}
     </div>
-    <form method="post" autocomplete="off" name="delform" id="delform" action="home.php?mod=space&do=thread&view=all&order=dateline" onsubmit="showDialog('{lang del_select_thread_confirm}', 'confirm', '', '$(\'delform\').submit();'); return false;">
+	<form method="post" autocomplete="off" name="delform" id="delform" action="home.php?mod=space&do=thread&view=all&order=dateline" onsubmit="showDialog('{lang del_select_thread_confirm}', 'confirm', '', '$(\'delform\').submit();'); return false;">
         <input type="hidden" name="formhash" value="{FORMHASH}" />
         <input type="hidden" name="delthread" value="true" />
         <!--{if $list}-->
         
             <!--{loop $list $thread}-->
-                <div class="bm_c">
+            	<div class="bm_c">
                     <!--{if $viewtype == 'reply' || $viewtype == 'postcomment'}-->
                         <a href="forum.php?mod=redirect&goto=findpost&ptid=$thread[tid]&pid=$thread[pid]" target="_blank">$thread[subject]</a>
                     <!--{else}-->
@@ -25,7 +25,7 @@
             </div>
             <!--{/loop}-->
         <!--{else}-->
-            <div class="bm_c">
+        	<div class="bm_c">
             {lang no_related_posts}
             </div>
         <!--{/if}-->

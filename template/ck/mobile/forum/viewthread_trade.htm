@@ -12,15 +12,15 @@
 
 
 <!--{if count($trades) > 1 || ($_G['uid'] == $_G['forum_thread']['authorid'] || $_G['group']['allowedittrade'])}-->
-    <div class="box">
-        <em>{lang post_trade_totalnumber}: $tradenum</em>
-        <!--{if !$_G['forum_thread']['is_archived'] && ($_G['uid'] == $_G['forum_thread']['authorid'] || $_G['group']['allowedittrade'])}-->
-            <span class="xi1">{lang trade_mod}</span>
-        <!--{/if}-->
-    </div>
+	<div class="box">
+		<em>{lang post_trade_totalnumber}: $tradenum</em>
+		<!--{if !$_G['forum_thread']['is_archived'] && ($_G['uid'] == $_G['forum_thread']['authorid'] || $_G['group']['allowedittrade'])}-->
+			<span class="xi1">{lang trade_mod}</span>
+		<!--{/if}-->
+	</div>
 <!--{/if}-->
 <!--{if $tradenum}-->
-    <!--{if $trades}-->
+	<!--{if $trades}-->
         <!--{loop $trades $key $trade}-->
             <div id="trade$trade[pid]" class="box">
                 <div>
@@ -70,8 +70,8 @@
                 </div>
             </div>
         <!--{/loop}-->
-    <!--{/if}-->
+	<!--{/if}-->
 <div id="postmessage_$post[pid]">$post[counterdesc]</div>
 <!--{else}-->
-    <div class="locked">{lang trade_nogoods}</div>
+	<div class="locked">{lang trade_nogoods}</div>
 <!--{/if}-->
