@@ -38,16 +38,15 @@ if($page<1) $page=1;
 	$picmode = 0;
 
 	$gets = array(
-		'mod' => 'space',
-		'uid' => $space['uid'],
+		'mod' => 'index',
 		'do' => 'album',
 		'catid' => $_GET['catid'],
-		'order' => $_GET['order'],
 		'fuid' => $_GET['fuid'],
 		'searchkey' => $_GET['searchkey'],
 		'from' => $_GET['from']
 	);
-	$theurl = 'home.php?'.url_implode($gets);
+	$theurl = 'photo.php?'.url_implode($gets);
+	
 	$actives = array($_GET['view'] =>' class="a"');
 
 	$need_count = true;
@@ -55,30 +54,7 @@ if($page<1) $page=1;
 
 	$wheresql = '1';
 
-	if($_GET['order'] == 'hot') {
-		$orderactives = array('hot' => ' class="a"');
-		$picmode = 1;
-		$need_count = false;
-
-		$ordersql = 'p.dateline';
-
-		$count = C::t('home_pic')->fetch_all_by_sql('p.'.DB::field('hot', $minhot, '>='), '', 0, 0, 1);
-		if($count) {
-			$query = C::t('home_pic')->fetch_all_by_sql('p.'.DB::field('hot', $minhot, '>='), 'p.dateline DESC', $start, $perpage);
-			foreach($query as $value) {
-				if($value['friend'] != 4 && ckfriend($value['uid'], $value['friend'], $value['target_ids']) && ($value['status'] == 0 || $value['uid'] == $_G['uid'] || $_G['adminid'] == 1)) {
-					$value['pic'] = pic_get($value['filepath'], 'album', $value['thumb'], $value['remote']);
-					$list[] = $value;
-				} else {
-					$pricount++;
-				}
-			}
-		}
-
-	} else {
-		$orderactives = array('dateline' => ' class="a"');
-	}
-
+	$orderactives = array('dateline' => ' class="a"');
 
 	if($need_count) {
 
@@ -113,11 +89,7 @@ if($page<1) $page=1;
 	if($_G['uid']) {
 		$navtitle = lang('core', 'title_view_all').lang('core', 'title_album');
 	} else {
-		if($_GET['order'] == 'hot') {
-			$navtitle = lang('core', 'title_hot_pic_recommend');
-		} else {
-			$navtitle = lang('core', 'title_newest_update_album');
-		}
+		$navtitle = lang('core', 'title_newest_update_album');
 	}
 	if($space['username']) {
 		$navtitle = lang('space', 'sb_album', array('who' => $space['username']));

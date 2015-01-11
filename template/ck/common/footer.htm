@@ -59,8 +59,7 @@
             <p>
                 <!--{loop $_G['setting']['footernavs'] $nav}--><!--{if $nav['available'] && ($nav['type'] && (!$nav['level'] || ($nav['level'] == 1 && $_G['uid']) || ($nav['level'] == 2 && $_G['adminid'] > 0) || ($nav['level'] == 3 && $_G['adminid'] == 1)) ||
                         !$nav['type'] && ($nav['id'] == 'stat' && $_G['group']['allowstatdata'] || $nav['id'] == 'report' && $_G['uid'] || $nav['id'] == 'archiver' || $nav['id'] == 'mobile' || $nav['id'] == 'darkroom'))}-->$nav[code]<span class="pipe">|</span><!--{/if}--><!--{/loop}-->
-                        <strong><a href="$_G['setting']['siteurl']" target="_blank">$_G['setting']['sitename']</a></strong>
-                <!--{hook/global_footerlink}-->
+                        <a href="$_G['setting']['siteurl']" target="_blank">$_G['setting']['sitename']</a>
                 <!--{if $_G['setting']['statcode']}-->$_G['setting']['statcode']<!--{/if}-->
             </p>
         </div>

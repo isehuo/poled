@@ -655,8 +655,10 @@ function getcurrentnav() {
 		return $_G['mnid'];
 	}
 	$mnid = '';
+	$tttt = "";
 	$_G['basefilename'] = $_G['basefilename'] == $_G['basescript'] ? $_G['basefilename'] : $_G['basescript'].'.php';
 	if(isset($_G['setting']['navmns'][$_G['basefilename']])) {
+
 		if($_G['basefilename'] == 'home.php' && $_GET['mod'] == 'space' && (empty($_GET['do']) || in_array($_GET['do'], array('follow', 'view')))) {
 			$_GET['mod'] = 'follow';
 		}
@@ -665,6 +667,7 @@ function getcurrentnav() {
 				$mnid = $navmn[1];
 			}
 		}
+		$tttt = "999999".$mnid ;
 
 	}
 	if(!$mnid && isset($_G['setting']['navdms'])) {

@@ -8,7 +8,7 @@
  */
 
 define('APPTYPEID', 1);
-define('CURSCRIPT', 'home');
+define('CURSCRIPT', 'photo');
 
 #if(!empty($_GET['mod']) && ($_GET['mod'] == 'misc' || $_GET['mod'] == 'invite')) {
 	define('ALLOWGUEST', 1);

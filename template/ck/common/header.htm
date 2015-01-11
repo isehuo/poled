@@ -46,11 +46,11 @@
             <!--{hook/global_cpnav_top}-->
             <div class="wp">
                 <div class="z">
-                    <a href="#" onclick="setHomepage('http://pole365.com/');">占位</a>
-                    <!--{hook/global_cpnav_extra1}-->
+                    <!--{loop $_G['setting']['topnavs'][0] $nav}-->
+                        <!--{if $nav['available'] && (!$nav['level'] || ($nav['level'] == 1 && $_G['uid']) || ($nav['level'] == 2 && $_G['adminid'] > 0) || ($nav['level'] == 3 && $_G['adminid'] == 1))}-->$nav[code]<!--{/if}-->
+                    <!--{/loop}-->
                 </div>
                 <div class="y">
-                    
                     <!--{if $_G['uid']}-->
                         <span class="vwmy{if $_G['setting']['connect']['allow'] && $_G[member][conisbind]} qq{/if}"><a href="home.php?mod=space&uid=$_G[uid]" id="myitem" class="showmenu" onmouseover="showMenu({'ctrlid':'myitem'});"><!--{avatar($_G[uid],small)}-->{$_G[member][username]}</a></span>
                         <!--{if ($_G['group']['allowmanagearticle'] || $_G['group']['allowpostarticle'] || $_G['group']['allowdiy'] || getstatus($_G['member']['allowadmincp'], 4) || getstatus($_G['member']['allowadmincp'], 6) || getstatus($_G['member']['allowadmincp'], 2) || getstatus($_G['member']['allowadmincp'], 3))}-->
