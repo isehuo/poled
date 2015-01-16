@@ -23,139 +23,30 @@
         <!--[diy=diycontenttop]--><div id="diycontenttop" class="area"></div><!--[/diy]-->
         <div class="bm bw0">
             <div class="bm_c">
-
+                <!--{if $pic[title]}--><h2>$pic[title]</h2><!--{/if}-->
                 <div class="tbmu" id="pic_block">
                     <div class="y">
-                        <a href="photo.php?do=$do&aid=$album[albumid]&picid=$upid&goto=up#pic_block">上一张</a><span class="pipe">|</span>
-                        <a href="photo.php?do=$do&aid=$album[albumid]&picid=$nextid&goto=down#pic_block" id="nextlink">下一张</a><span class="pipe">|</span>
+                        <a href="photo.php?do=$do&aid=$album[albumid]&picid=$upid">上一张</a><span class="pipe">|</span>
+                        <a href="photo.php?do=$do&aid=$album[albumid]&picid=$nextid" id="nextlink">下一张</a><span class="pipe">|</span>
+                        <a href="$pic[pic]" target="_blank">查看原图</a><span class="pipe">|</span>
                         <span id="displayNum"></span>
                     </div>
                     <!--{if $album[picnum]}-->
-                        <!--{hook/space_album_pic_top}-->
-                        /$album[picnum]
+                        <!--{hook/space_album_pic_top}-->/$album[picnum]
                     <!--{/if}-->
                 </div>
-
+                
                 <div class="vw pic">
-                    <div id="photo_pic" class="c{if $pic[magicframe]} magicframe magicframe$pic[magicframe]{/if}">
-                        <!--{if $pic[magicframe]}-->
-                        <div class="pic_lb1">
-                            <table cellpadding="0" cellspacing="0" class="">
-                                <tr>
-                                    <td class="frame_jiao frame_top_left"></td>
-                                    <td class="frame_x frame_top_middle"></td>
-                                    <td class="frame_jiao frame_top_right"></td>
-                                </tr>
-                                <tr>
-                                    <td class="frame_y frame_middle_left"></td>
-                                    <td class="frame_middle_middle">
-                                        <!--{/if}--><a href="photo.php?do=$do&aid=$album[albumid]&picid=$nextid&goto=down#pic_block"><img src="$pic[pic]" id="pic" alt="" /></a>
-                                        <script type="text/javascript">
-                                            function createElem(e){
-                                                var obj = document.createElement(e);
-                                                obj.style.position = 'absolute';
-                                                obj.style.zIndex = '1';
-                                                obj.style.cursor = 'pointer';
-                                                obj.onmouseout = function(){ this.style.background = 'none';}
-                                                return obj;
-                                            }
-                                            function viewPhoto(){
-                                                var pager = createElem('div');
-                                                var pre = createElem('div');
-                                                var next = createElem('div');
-                                                var cont = $('photo_pic');
-                                                var tar = $('pic');
-                                                var space = 0;
-                                                var w = tar.width/2;
-                                                if(!!window.ActiveXObject && !window.XMLHttpRequest){
-                                                    space = -(cont.offsetWidth - tar.width)/2;
-                                                }
-                                                var objpos = fetchOffset(tar);
-
-                                                pager.style.position = 'absolute';
-                                                pager.style.top = '0';
-                                                pager.style.left = objpos['left'] + 'px';
-                                                pager.style.top = objpos['top'] + 'px';
-                                                pager.style.width = tar.width + 'px';
-                                                pager.style.height = tar.height + 'px';
-                                                pre.style.left = 0;
-                                                next.style.right = 0;
-                                                pre.style.width = next.style.width = w + 'px';
-                                                pre.style.height = next.style.height = tar.height + 'px';
-                                                pre.innerHTML = next.innerHTML = '<img src="{IMGDIR}/emp.gif" width="' + w + '" height="' + tar.height + '" />';
-
-                                                pre.onmouseover = function(){ this.style.background = 'url({IMGDIR}/pic-prev.png) no-repeat 0 100px'; }
-                                                pre.onclick = function(){ window.location = 'photo.php?do=$do&aid=$album[albumid]&picid=$upid&goto=up#pic_block'; }
-
-                                                next.onmouseover = function(){ this.style.background = 'url({IMGDIR}/pic-next.png) no-repeat 100% 100px'; }
-                                                next.onclick = function(){ window.location = 'photo.php?do=$do&aid=$album[albumid]&picid=$nextid&goto=down#pic_block'; }
-
-                                                //cont.style.position = 'relative';
-                                                cont.appendChild(pager);
-                                                pager.appendChild(pre);
-                                                pager.appendChild(next);
-                                            }
-                                            $('pic').onload = function(){
-                                                viewPhoto();
-                                            }
-                                        </script>
-                                        <!--{if $pic[magicframe]}-->
-                                    </td>
-                                    <td class="frame_y frame_middle_right"></td>
-                                </tr>
-                                <tr>
-                                    <td class="frame_jiao frame_bottom_left"></td>
-                                    <td class="frame_x frame_bottom_middle"></td>
-                                    <td class="frame_jiao frame_bottom_right"></td>
-                                </tr>
-                            </table>
-                        </div>
-                        <!--{/if}-->
+                    <div id="photo_pic" class="c">
+                        <a href="photo.php?do=$do&aid=$album[albumid]&picid=$nextid"><img src="$pic[pic]" id="pic" alt="$pic[title]" /></a> 
                     </div>
 
                     <div class="pns mlnv vm mtm cl">
-                        <a href="photo.php?do=$do&aid=$album[albumid]&picid=$upid&goto=up#pic_block" class="btn" title="{lang previous_pic}"><img src="{STATICURL}image/common/pic_nv_prev.gif" alt="{lang previous_pic}"/></a><!--{loop $piclist $value}--><a href="photo.php?do=$do&aid=$album[albumid]&picid=$value[picid]#pic_block"><img alt="" src="$value[pic]"{if $value[picid]==$picid} class="a"{/if} /></a><!--{/loop}--><a href="photo.php?do=$do&aid=$album[albumid]&picid=$nextid&goto=down#pic_block" class="btn" title="{lang next_pic}"><img src="{STATICURL}image/common/pic_nv_next.gif" alt="{lang next_pic}"/></a>
-                    </div>
-
-                    <div class="d bbs">
-                        <p id="a_set_title" class="albim_pic_title"><!--{if $pic[title]}-->$pic[title]<!--{else}--><!--{eval echo substr($pic['filename'], 0, strrpos($pic['filename'], '.'));}--><!--{/if}--><!--{if $pic[status] == 1}--><b>({lang moderate_need})</b><!--{/if}--></p>
-                        <p class="xg1 xs1">
-                            <!--{if $pic[hot]}--><span class="hot">热度 <em>$pic[hot]</em></span><!--{/if}-->
-                            上传于 <!--{date($pic[dateline])}-->
-                        </p>
-                        
-                        <div class="o cl bw0 xs1 pbn">
-                            <!--{hook/space_album_pic_op_extra}-->
-                            <!--{if $pic[uid] == $_G[uid]}-->
-                            <!--{if $_G[magic][frame]}-->
-                                <img src="{STATICURL}image/magic/frame.small.gif" alt="frame" class="vm" />
-                                <!--{if $pic[magicframe]}-->
-                                <a id="a_magic_frame" href="home.php?mod=spacecp&ac=magic&op=cancelframe&idtype=picid&id=$pic[picid]" onclick="ajaxmenu(event,this.id)">{lang cancel_frame}</a>
-                                <!--{else}-->
-                                <a id="a_magic_frame" href="home.php?mod=magic&mid=frame&idtype=picid&id=$pic[picid]" onclick="ajaxmenu(event,this.id, 1)">{lang add_frame}</a>
-                                <!--{/if}-->
-                                <span class="pipe">|</span>
-                            <!--{/if}-->
-
-                            <!--{/if}-->
-
-
-                            <!--{if checkperm('managealbum')}-->
-                            <span class="pipe">|</span>IP: $pic[postip]{if $pic[port]}:$pic[port]{/if}
-                            <span class="pipe">|</span><a href="home.php?mod=spacecp&ac=album&picid=$pic[picid]&op=edithot&handlekey=picedithothk_{$pic[picid]}" id="a_hot_$pic[picid]" onclick="showWindow(this.id, this.href, 'get', 0);">热度</a>
-                            <!--{/if}-->
-                            <!--a href="home.php?mod=spacecp&ac=common&op=report&idtype=picid&id=$pic[picid]&handlekey=reportpichk_{$pic[picid]}" id="a_report" onclick="showWindow(this.id, this.href, 'get', 0);">{lang report}</a-->
-
-                            <span class="z">
-                                <a href="$pic[pic]" target="_blank">查看原图</a>
-                                
-                                <!--{if $_G['group']['allowdiy'] || getstatus($_G['member']['allowadmincp'], 4) || getstatus($_G['member']['allowadmincp'], 5)}-->
-                                <span class="pipe">|</span><a href="portal.php?mod=portalcp&ac=portalblock&op=recommend&idtype=picid&id=$pic[picid]" onclick="showWindow('recommend', this.href, 'get', 0)">{lang blockdata_recommend}</a>
-                                <!--{/if}-->
-                                
-                                <!--{hook/space_album_pic_bottom}-->
-                            </span>
-                        </div>
+                        <a href="photo.php?do=$do&aid=$album[albumid]&picid=$upid&goto=up" class="btn" title="{lang previous_pic}"><img src="{STATICURL}image/common/pic_nv_prev.gif" alt="{lang previous_pic}"/></a>
+                        <!--{loop $piclist $value}-->
+                            <a href="photo.php?do=$do&aid=$album[albumid]&picid=$value[picid]"><img alt="" src="$value[pic]"{if $value[picid]==$picid} class="a"{/if} /></a>
+                        <!--{/loop}-->
+                        <a href="photo.php?do=$do&aid=$album[albumid]&picid=$nextid" class="btn" title="{lang next_pic}"><img src="{STATICURL}image/common/pic_nv_next.gif" alt="{lang next_pic}"/></a>
                     </div>
                 </div>
                 <!--[diy=diyclicktop]--><div id="diyclicktop" class="area"></div><!--[/diy]-->
@@ -164,7 +55,7 @@
                 <div id="pic_comment" class="bm bw0 mtm mbm">
                     <h3 class="pbn bbs">
                         <!--{if !empty($list)}-->
-                        <a href="photo.php?do=$do&aid=$album[albumid]&picid=$pic[picid]#quickcommentform_{$picid}" onclick="if($('comment_message')){$('comment_message').focus();return false;}" class="y xi2 xw0">发表评论</a>
+                            <a href="photo.php?do=$do&aid=$album[albumid]&picid=$pic[picid]#quickcommentform_{$picid}" onclick="if($('comment_message')){$('comment_message').focus();return false;}" class="y xi2 xw0">发表评论</a>
                         <!--{/if}-->
                         评论
                     </h3>
@@ -185,15 +76,6 @@
                 </div>
                 <!--{if helper_access::check_module('album')}-->
                 <form id="quickcommentform_{$picid}" name="quickcommentform_{$picid}" action="home.php?mod=spacecp&ac=comment&handlekey=qcpic_{$picid}" method="post" autocomplete="off" onsubmit="ajaxpost('quickcommentform_{$picid}', 'return_qcpic_{$picid}');doane(event);" class="bm bw0" style="width: 600px;">
-                    <!--{if $_G['uid']}-->
-                        <p>
-                            <span id="comment_face" onclick="showFace(this.id, 'comment_message');return false;" class="cur1"><img src="{IMGDIR}/facelist.gif" alt="facelist" class="vm" /></span>
-                            <!--{hook/space_album_pic_face_extra}-->
-                            <!--{if $_G['setting']['magicstatus'] && !empty($_G['setting']['magics']['doodle'])}-->
-                            <a id="a_magic_doodle" href="home.php?mod=magic&mid=doodle&showid=comment_doodle&target=comment_message" onclick="showWindow(this.id, this.href, 'get', 0)"><img src="{STATICURL}image/magic/doodle.small.gif" alt="doodle" class="vm" /> $_G['setting']['magics']['doodle']</a>
-                            <!--{/if}-->
-                        </p>
-                    <!--{/if}-->
                     <div class="tedt mtn mbn">
                         <div class="area">
                             <!--{if $_G['uid'] || $_G['group']['allowcomment']}-->
@@ -230,14 +112,6 @@
                     } else {
                         $('return_qcpic_{$picid}').innerHTML = msg;
                     }
-                    <!--{if $sechash}-->
-                        <!--{if $secqaacheck}-->
-                        updatesecqaa('$sechash');
-                        <!--{/if}-->
-                        <!--{if $seccodecheck}-->
-                        updateseccode('$sechash');
-                        <!--{/if}-->
-                    <!--{/if}-->
                 }
             </script>
 
@@ -249,7 +123,7 @@
                 var num = 0;
                 var endPlay = false;
                 function forward() {
-                    window.location.href = 'photo.php?do=$do&aid=$album[albumid]&picid=$nextid&goto=down&play=1#pic_block';
+                    window.location.href = 'photo.php?do=$do&aid=$album[albumid]&picid=$nextid&play=1';
                 }
                 function derivativeNum() {
                     num++;
@@ -276,27 +150,7 @@
                         window.clearInterval(derId);
                     }
                 }
-                <!--{if $_GET['play']}-->
-                <!--{if $sequence && $album['picnum']}-->
-                if($sequence == $album[picnum]) {
-                    endPlay = true;
-                    playNextPic(false);
-                } else {
-                    playNextPic(true);
-                }
-                <!--{else}-->
-                playNextPic(true);
-                <!--{/if}-->
-                <!--{/if}-->
-
-                function update_title() {
-                    $('title_form').style.display='';
-                }
-
-                var elems = selector('dd[class~=magicflicker]');
-                for(var i=0; i<elems.length; i++){
-                    magicColor(elems[i]);
-                }
+               
             </script>
 
             <!--end bm-->
@@ -310,4 +164,11 @@
 <div class="wp mtn">
     <!--[diy=diy3]--><div id="diy3" class="area"></div><!--[/diy]-->
 </div>
+<script type="text/javascript" src="{$_G[setting][jspath]}photo_pic.js?{VERHASH}"></script>
+<script type="text/javascript">
+    viewPhoto({
+        prepic:"photo.php?do=$do&aid=$album[albumid]&picid=$upid",
+        nextpic:""
+    });
+</script>
 <!--{template common/footer}-->

@@ -92,4 +92,5 @@ $metakeywords = $navtitle;
 $metadescription = $navtitle;
 include_once template("diy:photo/album");
 print_r($_G['setting']['output']['preg']);
+print_r($_G['setting']['rewriterule']["photo_pic"]);
 ?>

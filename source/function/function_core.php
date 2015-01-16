@@ -972,11 +972,14 @@ function rewriteoutput($type, $returntype, $host) {
 			'{page}' => $page ? $page : 1,
 		);
 	} elseif($type == 'photo_pic') {
-		list(,,, $aid, $picid, $extra) = func_get_args();
+		list(,,, $aid, $picid, $param, $extra) = func_get_args();
 		$r = array(
 			'{aid}' => $aid,
 			'{picid}' => $picid ? $picid : 0,
 		);
+		if($param) {
+			$fextra = $param;
+		}
 	} elseif($type == 'portal_topic') {
 		list(,,, $name, $extra) = func_get_args();
 		$r = array(
