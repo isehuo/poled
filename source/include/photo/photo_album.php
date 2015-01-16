@@ -18,85 +18,78 @@ $picid = empty($_GET['picid'])?0:intval($_GET['picid']);
 $page = empty($_GET['page'])?1:intval($_GET['page']);
 if($page<1) $page=1;
 
+loadcache('albumcategory');
+$category = $_G['cache']['albumcategory'];
 
-	loadcache('albumcategory');
-	$category = $_G['cache']['albumcategory'];
+$perpage = 2;
+$perpage = mob_perpage($perpage);
 
-	$perpage = 20;
-	$perpage = mob_perpage($perpage);
+$start = ($page-1)*$perpage;
 
-	$start = ($page-1)*$perpage;
+ckstart($start, $perpage);
 
-	ckstart($start, $perpage);
+$_GET['friend'] = intval($_GET['friend']);
 
-	$_GET['friend'] = intval($_GET['friend']);
+$default = array();
+$f_index = '';
+$list = array();
+$pricount = 0;
+$picmode = 0;
 
-	$default = array();
-	$f_index = '';
-	$list = array();
-	$pricount = 0;
-	$picmode = 0;
+$gets = array(
+	// 'mod' => 'index',
+	'do' => 'album',
+	// 'fuid' => $_GET['fuid'],
+	// 'searchkey' => $_GET['searchkey'],
+	// 'from' => $_GET['from'],
+	'catid' => $_GET['catid']
+);
+$theurl = 'photo.php?do=album&catid='.$_GET['catid'];
+// $theurl = "album-".$_GET['catid']."-".$page.".html";
 
-	$gets = array(
-		'mod' => 'index',
-		'do' => 'album',
-		'catid' => $_GET['catid'],
-		'fuid' => $_GET['fuid'],
-		'searchkey' => $_GET['searchkey'],
-		'from' => $_GET['from']
-	);
-	$theurl = 'photo.php?'.url_implode($gets);
-	
-	$actives = array($_GET['view'] =>' class="a"');
+$actives = array($_GET['view'] =>' class="a"');
 
-	$need_count = true;
+$need_count = true;
 
 
-	$wheresql = '1';
+$wheresql = '1';
 
-	$orderactives = array('dateline' => ' class="a"');
+$orderactives = array('dateline' => ' class="a"');
 
-	if($need_count) {
+if($need_count) {
 
-		if($searchkey = stripsearchkey($_GET['searchkey'])) {
-			$sqlSearchKey = $searchkey;
-			$searchkey = dhtmlspecialchars($searchkey);
-		}
+	if($searchkey = stripsearchkey($_GET['searchkey'])) {
+		$sqlSearchKey = $searchkey;
+		$searchkey = dhtmlspecialchars($searchkey);
+	}
 
-		$catid = empty($_GET['catid'])?0:intval($_GET['catid']);
+	$catid = empty($_GET['catid'])?0:intval($_GET['catid']);
 
-		$count = C::t('home_album')->fetch_all_by_search(3, $uids, $sqlSearchKey, true, $catid, 0, 0, '');
+	$count = C::t('home_album')->fetch_all_by_search(3, $uids, $sqlSearchKey, true, $catid, 0, 0, '');
 
-		if($count) {
-			$query = C::t('home_album')->fetch_all_by_search(1, $uids, $sqlSearchKey, true, $catid, 0, 0, '', '', 'updatetime', 'DESC', $start, $perpage, $f_index);
-			foreach($query as $value) {
-				if($value['friend'] != 4 && ckfriend($value['uid'], $value['friend'], $value['target_ids'])) {
-					$value['pic'] = pic_cover_get($value['pic'], $value['picflag']);
-				} elseif ($value['picnum']) {
-					$value['pic'] = STATICURL.'image/common/nopublish.gif';
-				} else {
-					$value['pic'] = '';
-				}
-				$list[] = $value;
+	if($count) {
+		$query = C::t('home_album')->fetch_all_by_search(1, $uids, $sqlSearchKey, true, $catid, 0, 0, '', '', 'updatetime', 'DESC', $start, $perpage, $f_index);
+		foreach($query as $value) {
+			if($value['friend'] != 4 && ckfriend($value['uid'], $value['friend'], $value['target_ids'])) {
+				$value['pic'] = pic_cover_get($value['pic'], $value['picflag']);
+			} elseif ($value['picnum']) {
+				$value['pic'] = STATICURL.'image/common/nopublish.gif';
+			} else {
+				$value['pic'] = '';
 			}
+			$list[] = $value;
 		}
 	}
+}
 
-	$multi = multi($count, $perpage, $page, $theurl);
+$multi = multi($count, $perpage, $page, $theurl);
 
-	dsetcookie('home_diymode', $diymode);
+dsetcookie('home_diymode', $diymode);
 
-	if($_G['uid']) {
-		$navtitle = lang('core', 'title_view_all').lang('core', 'title_album');
-	} else {
-		$navtitle = lang('core', 'title_newest_update_album');
-	}
-	if($space['username']) {
-		$navtitle = lang('space', 'sb_album', array('who' => $space['username']));
-	}
+$navtitle = lang('core', 'title_newest_update_album');
 
-	$metakeywords = $navtitle;
-	$metadescription = $navtitle;
-	include_once template("diy:photo/album");
-
+$metakeywords = $navtitle;
+$metadescription = $navtitle;
+include_once template("diy:photo/album");
+print_r($_G['setting']['output']['preg']);
 ?>

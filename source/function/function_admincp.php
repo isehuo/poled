@@ -1373,6 +1373,17 @@ function rewritedata($alldata = 1) {
 			$data['search']['plugin'] = "/<a href\=\"plugin\.php\?id=([a-z]+[a-z0-9_]*):([a-z0-9_\-]+)(&amp;|&)?(.*?)?\"([^\>]*)\>/e";
 			$data['replace']['plugin'] = "rewriteoutput('plugin', 0, '\\1', '\\2', '\\3', '\\4', '\\5')";
 		}
+		// add new
+		if(in_array('photo_album', $_G['setting']['rewritestatus'])) {
+			$data['search']['photo_album'] = "/".$_G['domain']['pregxprw']['photo']."\?do\=album&(amp;)?catid\=(\d+)(&amp;page\=(\d+))?\"([^\>]*)\>/e";
+			$data['replace']['photo_album'] = "rewriteoutput('photo_album', 0, '\\1', '\\3', '\\5', '\\6')";
+		}
+		if(in_array('photo_pic', $_G['setting']['rewritestatus'])) {
+			$data['search']['photo_pic'] = "/".$_G['domain']['pregxprw']['photo']."\?do\=pic&(amp;)aid\=(\d+)?(&amp;picid\=(\d+))?\"([^\>]*)\>/e";
+			// $data['search']['home_blog'] = "/".$_G['domain']['pregxprw']['home']."\?mod=space&(amp;)?id\=(\d+)&(amp;)\"([^\>]*)\>/e";
+			$data['replace']['photo_pic'] = "rewriteoutput('photo_pic', 0, '\\1', '\\3', '\\5', '\\6')";
+		}
+
 	} else {
 		$data['rulesearch']['portal_topic'] = 'topic-{name}.html';
 		$data['rulereplace']['portal_topic'] = 'portal.php?mod=topic&topic={name}';
@@ -1418,6 +1429,17 @@ function rewritedata($alldata = 1) {
 		$data['rulereplace']['plugin'] = 'plugin.php?id={pluginid}:{module}';
 		$data['rulevars']['plugin']['{pluginid}'] = '([a-z]+[a-z0-9_]*)';
 		$data['rulevars']['plugin']['{module}'] = '([a-z0-9_\-]+)';
+
+		// daqiu
+		$data['rulesearch']['photo_album'] = 'album-{catid}-{page}.html';
+		$data['rulereplace']['photo_album'] = 'photo.php?do=album&catid={catid}&page={page}';
+		$data['rulevars']['photo_album']['{catid}'] = '([0-9]+)';
+		$data['rulevars']['photo_album']['{page}'] = '([0-9]+)';
+
+		$data['rulesearch']['photo_pic'] = 'pic-{id}.html';
+		$data['rulereplace']['photo_pic'] = 'photo.php?do=pic&aid={id}&picid={picid}';
+		$data['rulevars']['photo_pic']['{aid}'] = '([0-9]+)';
+		$data['rulevars']['photo_pic']['{picid}'] = '([0-9]+)';
 	}
 	return $data;
 }

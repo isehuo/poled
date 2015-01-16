@@ -9,7 +9,7 @@
         <!--{if $album['catname']}-->
             <a href="photo.php?catid=$album[catid]">$album[catname]</a> <em>&rsaquo;</em>
          <!--{/if}-->
-         <a href="photo.php?do={$do}&id=$album[albumid]">$album[albumname]</a>
+         <a href="photo.php?do={$do}&aid=$album[albumid]">$album[albumname]</a>
     </div>
 </div>
 
@@ -26,8 +26,8 @@
 
                 <div class="tbmu" id="pic_block">
                     <div class="y">
-                        <a href="photo.php?do=$do&picid=$upid&goto=up#pic_block">上一张</a><span class="pipe">|</span>
-                        <a href="photo.php?do=$do&picid=$nextid&goto=down#pic_block" id="nextlink">下一张</a><span class="pipe">|</span>
+                        <a href="photo.php?do=$do&aid=$album[albumid]&picid=$upid&goto=up#pic_block">上一张</a><span class="pipe">|</span>
+                        <a href="photo.php?do=$do&aid=$album[albumid]&picid=$nextid&goto=down#pic_block" id="nextlink">下一张</a><span class="pipe">|</span>
                         <span id="displayNum"></span>
                     </div>
                     <!--{if $album[picnum]}-->
@@ -49,7 +49,7 @@
                                 <tr>
                                     <td class="frame_y frame_middle_left"></td>
                                     <td class="frame_middle_middle">
-                                        <!--{/if}--><a href="photo.php?do=$do&picid=$nextid&goto=down#pic_block"><img src="$pic[pic]" id="pic" alt="" /></a>
+                                        <!--{/if}--><a href="photo.php?do=$do&aid=$album[albumid]&picid=$nextid&goto=down#pic_block"><img src="$pic[pic]" id="pic" alt="" /></a>
                                         <script type="text/javascript">
                                             function createElem(e){
                                                 var obj = document.createElement(e);
@@ -85,10 +85,10 @@
                                                 pre.innerHTML = next.innerHTML = '<img src="{IMGDIR}/emp.gif" width="' + w + '" height="' + tar.height + '" />';
 
                                                 pre.onmouseover = function(){ this.style.background = 'url({IMGDIR}/pic-prev.png) no-repeat 0 100px'; }
-                                                pre.onclick = function(){ window.location = 'photo.php?do=$do&picid=$upid&goto=up#pic_block'; }
+                                                pre.onclick = function(){ window.location = 'photo.php?do=$do&aid=$album[albumid]&picid=$upid&goto=up#pic_block'; }
 
                                                 next.onmouseover = function(){ this.style.background = 'url({IMGDIR}/pic-next.png) no-repeat 100% 100px'; }
-                                                next.onclick = function(){ window.location = 'photo.php?do=$do&picid=$nextid&goto=down#pic_block'; }
+                                                next.onclick = function(){ window.location = 'photo.php?do=$do&aid=$album[albumid]&picid=$nextid&goto=down#pic_block'; }
 
                                                 //cont.style.position = 'relative';
                                                 cont.appendChild(pager);
@@ -114,7 +114,7 @@
                     </div>
 
                     <div class="pns mlnv vm mtm cl">
-                        <a href="photo.php?do=$do&picid=$upid&goto=up#pic_block" class="btn" title="{lang previous_pic}"><img src="{STATICURL}image/common/pic_nv_prev.gif" alt="{lang previous_pic}"/></a><!--{loop $piclist $value}--><a href="photo.php?do=$do&picid=$value[picid]#pic_block"><img alt="" src="$value[pic]"{if $value[picid]==$picid} class="a"{/if} /></a><!--{/loop}--><a href="photo.php?do=$do&picid=$nextid&goto=down#pic_block" class="btn" title="{lang next_pic}"><img src="{STATICURL}image/common/pic_nv_next.gif" alt="{lang next_pic}"/></a>
+                        <a href="photo.php?do=$do&aid=$album[albumid]&picid=$upid&goto=up#pic_block" class="btn" title="{lang previous_pic}"><img src="{STATICURL}image/common/pic_nv_prev.gif" alt="{lang previous_pic}"/></a><!--{loop $piclist $value}--><a href="photo.php?do=$do&aid=$album[albumid]&picid=$value[picid]#pic_block"><img alt="" src="$value[pic]"{if $value[picid]==$picid} class="a"{/if} /></a><!--{/loop}--><a href="photo.php?do=$do&aid=$album[albumid]&picid=$nextid&goto=down#pic_block" class="btn" title="{lang next_pic}"><img src="{STATICURL}image/common/pic_nv_next.gif" alt="{lang next_pic}"/></a>
                     </div>
 
                     <div class="d bbs">
@@ -164,7 +164,7 @@
                 <div id="pic_comment" class="bm bw0 mtm mbm">
                     <h3 class="pbn bbs">
                         <!--{if !empty($list)}-->
-                        <a href="photo.php?do=$do&picid=$pic[picid]#quickcommentform_{$picid}" onclick="if($('comment_message')){$('comment_message').focus();return false;}" class="y xi2 xw0">发表评论</a>
+                        <a href="photo.php?do=$do&aid=$album[albumid]&picid=$pic[picid]#quickcommentform_{$picid}" onclick="if($('comment_message')){$('comment_message').focus();return false;}" class="y xi2 xw0">发表评论</a>
                         <!--{/if}-->
                         评论
                     </h3>
@@ -249,7 +249,7 @@
                 var num = 0;
                 var endPlay = false;
                 function forward() {
-                    window.location.href = 'photo.php?do=$do&picid=$nextid&goto=down&play=1#pic_block';
+                    window.location.href = 'photo.php?do=$do&aid=$album[albumid]&picid=$nextid&goto=down&play=1#pic_block';
                 }
                 function derivativeNum() {
                     num++;

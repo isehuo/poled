@@ -655,7 +655,6 @@ function getcurrentnav() {
 		return $_G['mnid'];
 	}
 	$mnid = '';
-	$tttt = "";
 	$_G['basefilename'] = $_G['basefilename'] == $_G['basescript'] ? $_G['basefilename'] : $_G['basescript'].'.php';
 	if(isset($_G['setting']['navmns'][$_G['basefilename']])) {
 
@@ -667,7 +666,6 @@ function getcurrentnav() {
 				$mnid = $navmn[1];
 			}
 		}
-		$tttt = "999999".$mnid ;
 
 	}
 	if(!$mnid && isset($_G['setting']['navdms'])) {
@@ -967,6 +965,18 @@ function rewriteoutput($type, $returntype, $host) {
 			'{fid}' => $fid,
 			'{page}' => $page ? $page : 1,
 		);
+	} elseif($type == 'photo_album') {
+		list(,,, $catid, $page, $extra) = func_get_args();
+		$r = array(
+			'{catid}' => $catid,
+			'{page}' => $page ? $page : 1,
+		);
+	} elseif($type == 'photo_pic') {
+		list(,,, $aid, $picid, $extra) = func_get_args();
+		$r = array(
+			'{aid}' => $aid,
+			'{picid}' => $picid ? $picid : 0,
+		);
 	} elseif($type == 'portal_topic') {
 		list(,,, $name, $extra) = func_get_args();
 		$r = array(
@@ -1084,11 +1094,11 @@ function output_replace($content) {
 		$content = str_replace($_G['setting']['output']['str']['search'], $_G['setting']['output']['str']['replace'], $content);
 	}
 	if(!empty($_G['setting']['output']['preg']['search']) && (empty($_G['setting']['rewriteguest']) || empty($_G['uid']))) {
+		
 		if(empty($_G['setting']['domain']['app']['default'])) {
 			$_G['setting']['output']['preg']['search'] = str_replace('\{CURHOST\}', preg_quote($_G['siteurl'], '/'), $_G['setting']['output']['preg']['search']);
 			$_G['setting']['output']['preg']['replace'] = str_replace('{CURHOST}', $_G['siteurl'], $_G['setting']['output']['preg']['replace']);
 		}
-
 		$content = preg_replace($_G['setting']['output']['preg']['search'], $_G['setting']['output']['preg']['replace'], $content);
 	}
 
