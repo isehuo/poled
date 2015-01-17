@@ -116,9 +116,6 @@
     <div class="focus plugin" id="ip_notice"></div>
     <script type="text/javascript">ipNotice();</script>
 <!--{/if}-->
-<!--{if $_G['member']['newprompt'] && (empty($_G['cookie']['promptstate_'.$_G[uid]]) || $_G['cookie']['promptstate_'.$_G[uid]] != $_G['member']['newprompt']) && $_GET['do'] != 'notice'}-->
-    <script type="text/javascript">noticeTitle();</script>
-<!--{/if}-->
 
 <!--{if ($_G[member][newpm] || $_G[member][newprompt]) && empty($_G['cookie']['ignore_notice'])}-->
     <script type="text/javascript" src="{$_G[setting][jspath]}html5notification.js?{VERHASH}"></script>

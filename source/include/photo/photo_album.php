@@ -28,57 +28,41 @@ $start = ($page-1)*$perpage;
 
 ckstart($start, $perpage);
 
-$_GET['friend'] = intval($_GET['friend']);
-
 $default = array();
 $f_index = '';
 $list = array();
 $pricount = 0;
 $picmode = 0;
 
-$gets = array(
-	// 'mod' => 'index',
-	'do' => 'album',
-	// 'fuid' => $_GET['fuid'],
-	// 'searchkey' => $_GET['searchkey'],
-	// 'from' => $_GET['from'],
-	'catid' => $_GET['catid']
-);
 $theurl = 'photo.php?do=album&catid='.$_GET['catid'];
-// $theurl = "album-".$_GET['catid']."-".$page.".html";
 
 $actives = array($_GET['view'] =>' class="a"');
-
-$need_count = true;
-
 
 $wheresql = '1';
 
 $orderactives = array('dateline' => ' class="a"');
 
-if($need_count) {
 
-	if($searchkey = stripsearchkey($_GET['searchkey'])) {
-		$sqlSearchKey = $searchkey;
-		$searchkey = dhtmlspecialchars($searchkey);
-	}
+if($searchkey = stripsearchkey($_GET['searchkey'])) {
+	$sqlSearchKey = $searchkey;
+	$searchkey = dhtmlspecialchars($searchkey);
+}
 
-	$catid = empty($_GET['catid'])?0:intval($_GET['catid']);
+$catid = empty($_GET['catid'])?0:intval($_GET['catid']);
 
-	$count = C::t('home_album')->fetch_all_by_search(3, $uids, $sqlSearchKey, true, $catid, 0, 0, '');
+$count = C::t('home_album')->fetch_all_by_search(3, $uids, $sqlSearchKey, true, $catid, 0, 0, '');
 
-	if($count) {
-		$query = C::t('home_album')->fetch_all_by_search(1, $uids, $sqlSearchKey, true, $catid, 0, 0, '', '', 'updatetime', 'DESC', $start, $perpage, $f_index);
-		foreach($query as $value) {
-			if($value['friend'] != 4 && ckfriend($value['uid'], $value['friend'], $value['target_ids'])) {
-				$value['pic'] = pic_cover_get($value['pic'], $value['picflag']);
-			} elseif ($value['picnum']) {
-				$value['pic'] = STATICURL.'image/common/nopublish.gif';
-			} else {
-				$value['pic'] = '';
-			}
-			$list[] = $value;
+if($count) {
+	$query = C::t('home_album')->fetch_all_by_search(1, $uids, $sqlSearchKey, true, $catid, 0, 0, '', '', 'updatetime', 'DESC', $start, $perpage, $f_index);
+	foreach($query as $value) {
+		if($value['friend'] != 4) {
+			$value['pic'] = pic_cover_get($value['pic'], $value['picflag']);
+		} elseif ($value['picnum']) {
+			$value['pic'] = STATICURL.'image/common/nopublish.gif';
+		} else {
+			$value['pic'] = '';
 		}
+		$list[] = $value;
 	}
 }
 
@@ -86,11 +70,11 @@ $multi = multi($count, $perpage, $page, $theurl);
 
 dsetcookie('home_diymode', $diymode);
 
-$navtitle = lang('core', 'title_newest_update_album');
+$navtitle = "钢管舞图片". C::t('home_album_category')->fetch_catname_by_catid($catid);
 
-$metakeywords = $navtitle;
-$metadescription = $navtitle;
+$metakeywords = $navtitle. ", 钢管舞美女图片";
+$metadescription = "提供美女钢管舞、欧美钢管舞、钢管舞技巧等图片展示，欢迎分享自己学习钢管舞的自拍图片。";
 include_once template("diy:photo/album");
-print_r($_G['setting']['output']['preg']);
-print_r($_G['setting']['rewriterule']["photo_pic"]);
+// print_r($_G['setting']['output']['preg']);
+// print_r($_G['setting']['rewriterule']["photo_pic"]);
 ?>

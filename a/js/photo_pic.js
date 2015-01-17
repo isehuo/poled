@@ -39,17 +39,13 @@ function createElem(e){
 
 
 
-function viewPhoto(){
+function viewPhoto(config){
     var pager = createElem('div');
     var pre = createElem('div');
     var next = createElem('div');
     var cont = $('photo_pic');
     var tar = $('pic');
-    var space = 0;
     var w = tar.width/2;
-    if(!!window.ActiveXObject && !window.XMLHttpRequest){
-        space = -(cont.offsetWidth - tar.width)/2;
-    }
     var objpos = fetchOffset(tar);
 
     pager.style.position = 'absolute';
@@ -63,18 +59,12 @@ function viewPhoto(){
     pre.style.width = next.style.width = w + 'px';
     pre.style.height = next.style.height = tar.height + 'px';
     pre.innerHTML = next.innerHTML = '<img src="'+IMGDIR+'/emp.gif" width="' + w + '" height="' + tar.height + '" />';
-
     pre.onmouseover = function(){ this.style.background = 'url('+IMGDIR+'/pic-prev.png) no-repeat 0 100px'; }
-    pre.onclick = function(){ window.location = 'photo.php?do=$do&aid=$album[albumid]&picid=$upid'; }
-
+    pre.onclick = function(){ window.location = config.prevlink; }
     next.onmouseover = function(){ this.style.background = 'url('+IMGDIR+'/pic-next.png) no-repeat 100% 100px'; }
-    next.onclick = function(){ window.location = 'photo.php?do=$do&aid=$album[albumid]&picid=$nextid'; }
-
+    next.onclick = function(){ window.location = config.nextlink; }
     //cont.style.position = 'relative';
     cont.appendChild(pager);
     pager.appendChild(pre);
     pager.appendChild(next);
-}
-$('pic').onload = function(){
-    viewPhoto();
 }

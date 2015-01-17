@@ -4,12 +4,11 @@
 <!--{template common/header}-->
 <div id="pt" class="bm cl">
     <div class="z">
-        <a href="./" class="nvhm" title="{lang homepage}">$_G[setting][bbname]</a> <em>&rsaquo;</em>
-        <a href="photo.php?do=album">{lang album}</a> <em>&rsaquo;</em>
+        <a href="{$_G[setting][siteurl]}" class="nvhm" title="{lang homepage}">$_G[setting][bbname]</a> <em>&rsaquo;</em>
         <!--{if $album['catname']}-->
-            <a href="photo.php?catid=$album[catid]">$album[catname]</a> <em>&rsaquo;</em>
+            <a href="photo.php?do=album&catid=$album[catid]&page=1">$album[catname]</a> <em>&rsaquo;</em>
          <!--{/if}-->
-         <a href="photo.php?do={$do}&aid=$album[albumid]">$album[albumname]</a>
+         <a href="photo.php?do={$do}&aid=$album[albumid]&picid=0">$album[albumname]</a>
     </div>
 </div>
 
@@ -23,24 +22,20 @@
         <!--[diy=diycontenttop]--><div id="diycontenttop" class="area"></div><!--[/diy]-->
         <div class="bm bw0">
             <div class="bm_c">
-                <!--{if $pic[title]}--><h2>$pic[title]</h2><!--{/if}-->
+                <h2>$album[albumname]</h2>
+                
                 <div class="tbmu" id="pic_block">
                     <div class="y">
-                        <a href="photo.php?do=$do&aid=$album[albumid]&picid=$upid">上一张</a><span class="pipe">|</span>
-                        <a href="photo.php?do=$do&aid=$album[albumid]&picid=$nextid" id="nextlink">下一张</a><span class="pipe">|</span>
-                        <a href="$pic[pic]" target="_blank">查看原图</a><span class="pipe">|</span>
-                        <span id="displayNum"></span>
+                        [ $album[picnum] ] <a href="photo.php?do=$do&aid=$album[albumid]&picid=$upid" id="J-prevLink">上一张</a><span class="pipe">|</span>
+                        <a href="photo.php?do=$do&aid=$album[albumid]&picid=$nextid" id="J-nextLink">下一张</a><span class="pipe">|</span>
                     </div>
-                    <!--{if $album[picnum]}-->
-                        <!--{hook/space_album_pic_top}-->/$album[picnum]
-                    <!--{/if}-->
                 </div>
                 
                 <div class="vw pic">
                     <div id="photo_pic" class="c">
                         <a href="photo.php?do=$do&aid=$album[albumid]&picid=$nextid"><img src="$pic[pic]" id="pic" alt="$pic[title]" /></a> 
                     </div>
-
+                    <!--{if $pic[title]}--><p>$pic[title]</p><!--{/if}-->
                     <div class="pns mlnv vm mtm cl">
                         <a href="photo.php?do=$do&aid=$album[albumid]&picid=$upid&goto=up" class="btn" title="{lang previous_pic}"><img src="{STATICURL}image/common/pic_nv_prev.gif" alt="{lang previous_pic}"/></a>
                         <!--{loop $piclist $value}-->
@@ -114,47 +109,6 @@
                     }
                 }
             </script>
-
-            <script type="text/javascript">
-                var interval = 5000;
-                var timerId = -1;
-                var derId = -1;
-                var replay = false;
-                var num = 0;
-                var endPlay = false;
-                function forward() {
-                    window.location.href = 'photo.php?do=$do&aid=$album[albumid]&picid=$nextid&play=1';
-                }
-                function derivativeNum() {
-                    num++;
-                    $('displayNum').innerHTML = '[' + (interval/1000 - num) + ']';
-                }
-                function playNextPic(stat) {
-                    if(stat || replay) {
-                        derId = window.setInterval('derivativeNum();', 1000);
-                        $('displayNum').innerHTML = '[' + (interval/1000 - num) + ']';
-                        $('playid').onclick = function (){replay = false;playNextPic(false);};
-                        $('playid').innerHTML = '{lang stop_playing}';
-                        timerId = window.setInterval('forward();', interval);
-                    } else {
-                        replay = true;
-                        num = 0;
-                        if(endPlay) {
-                            $('playid').innerHTML = '{lang restart}';
-                        } else {
-                            $('playid').innerHTML = '{lang start_playing}';
-                        }
-                        $('playid').onclick = function (){playNextPic(true);};
-                        $('displayNum').innerHTML = '';
-                        window.clearInterval(timerId);
-                        window.clearInterval(derId);
-                    }
-                }
-               
-            </script>
-
-            <!--end bm-->
-
             <!--[diy=diycontentbottom]--><div id="diycontentbottom" class="area"></div><!--[/diy]-->
             </div>
         </div>
@@ -167,8 +121,8 @@
 <script type="text/javascript" src="{$_G[setting][jspath]}photo_pic.js?{VERHASH}"></script>
 <script type="text/javascript">
     viewPhoto({
-        prepic:"photo.php?do=$do&aid=$album[albumid]&picid=$upid",
-        nextpic:""
+        nextlink:$("J-nextLink").getAttribute("href"),
+        prevlink:$("J-prevLink").getAttribute("href")
     });
 </script>
 <!--{template common/footer}-->

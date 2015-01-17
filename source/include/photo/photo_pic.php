@@ -159,15 +159,14 @@ if($album['picnum']) {
 	$sequence = $nowkey + 1;
 }
 
-$diymode = intval($_G['cookie']['home_diymode']);
-
 $navtitle = $album['albumname'];
+
 if($pic['title']) {
 	$navtitle = $pic['title'].' - '.$navtitle;
 }
-$metakeywords = $pic['title'] ? $pic['title'] : $album['albumname'];
-$metadescription = $pic['title'] ? $pic['title'] : $albumname['albumname'];
 
+$metakeywords = $album['albumname'].", 钢管舞".$album['catname'];
+$metadescription = $pic['title']?$pic['title']:$album['depict'];
 
 include_once template("diy:photo/pic");
 
