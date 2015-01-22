@@ -1,6 +1,5 @@
 <!--{template common/header}-->
 <!--[name]{lang portalcategory_viewtplname}[/name]-->
-
 <script type="text/javascript" src="{$_G['setting']['jspath']}forum_viewthread.js?{VERHASH}"></script>
 <script type="text/javascript">zoomstatus = parseInt($_G['setting']['zoomstatus']), imagemaxwidth = '{$_G['setting']['imagemaxwidth']}', aimgcount = new Array();</script>
 <div id="pt" class="bm cl">
@@ -27,28 +26,20 @@
             <div class="h hm">
                 <h1 class="ph">$article[title] <!--{if $article['status'] == 1}-->({lang moderate_need})<!--{elseif $article['status'] == 2}-->({lang ignored})<!--{/if}--></h1>
                 <p class="xg1">
-                    $article[dateline]<span class="pipe">|</span>
-                    {lang view_publisher}: <a href="home.php?mod=space&uid=$article[uid]">$article[username]</a><span class="pipe">|</span>
-                    {lang view_views}: <em id="_viewnum"><!--{if $article[viewnum] > 0}-->$article[viewnum]<!--{else}-->0<!--{/if}--></em><span class="pipe">|</span>
+                    $article[dateline]  <span class="pipe">|</span>
+
                     {lang view_comments}: <!--{if $article[commentnum] > 0}--><a href="$common_url" title="{lang view_all_comments}"><em id="_commentnum">$article[commentnum]</em></a><!--{else}-->0<!--{/if}-->
-                    <!--{if $article[author]}--><span class="pipe">|</span>{lang view_author_original}: $article[author]<!--{/if}-->
+
                     <!--{if $article[from]}--><span class="pipe">|</span>{lang from}: <!--{if $article[fromurl]}--><a href="$article[fromurl]" target="_blank">$article[from]</a><!--{else}-->$article[from]<!--{/if}--><!--{/if}-->
 
                     <!--{if $_G['group']['allowmanagearticle'] || ($_G['group']['allowpostarticle'] && $article['uid'] == $_G['uid'] && (empty($_G['group']['allowpostarticlemod']) || $_G['group']['allowpostarticlemod'] && $article['status'] == 1)) || $categoryperm[$value['catid']]['allowmanage']}-->
                         <span class="pipe">|</span><a href="portal.php?mod=portalcp&ac=article&op=edit&aid=$article[aid]">{lang edit}</a>
-                        <!--{if $article[status]>0 && ($_G['group']['allowmanagearticle'] || $categoryperm[$value['catid']]['allowmanage'])}-->
-                            <span class="pipe">|</span><a href="portal.php?mod=portalcp&ac=article&op=verify&aid=$article[aid]" id="article_verify_$article[aid]" onclick="showWindow(this.id, this.href, 'get', 0);">{lang moderate}</a>
-                        <!--{else}-->
-                            <span class="pipe">|</span><a href="portal.php?mod=portalcp&ac=article&op=delete&aid=$article[aid]" id="article_delete_$article[aid]" onclick="showWindow(this.id, this.href, 'get', 0);">{lang delete}</a>
-                        <!--{/if}-->
                     <!--{/if}-->
                     <!--{hook/view_article_subtitle}-->
                 </p>
             </div>
 
             <!--[diy=diysummarytop]--><div id="diysummarytop" class="area"></div><!--[/diy]-->
-
-            <!--{if $article[summary] && empty($cat[notshowarticlesummay])}--><div class="s"><div><strong>{lang article_description}</strong>: $article[summary]</div><!--{hook/view_article_summary}--></div><!--{/if}-->
 
             <!--[diy=diysummarybottom]--><div id="diysummarybottom" class="area"></div><!--[/diy]-->
 
@@ -69,9 +60,6 @@
                 <!--[diy=diycontentbottom]--><div id="diycontentbottom" class="area"></div><!--[/diy]-->
 
                 <script type="text/javascript" src="{$_G[setting][jspath]}home.js?{VERHASH}"></script>
-                <div id="click_div">
-                    <!--{template home/space_click}-->
-                </div>
 
                 <!--{if !empty($contents)}-->
                 <div id="inner_nav" class="ptn xs1">
@@ -103,10 +91,7 @@
             <div class="o cl ptm pbm">
                 <!--{hook/view_article_op_extra}-->
                 <a href="home.php?mod=spacecp&ac=favorite&type=article&id=$article[aid]&handlekey=favoritearticlehk_{$article[aid]}" id="a_favorite" onclick="showWindow(this.id, this.href, 'get', 0);" class="oshr ofav">{lang favorite}</a>
-                <!--{if helper_access::check_module('share')}-->
-                <a href="home.php?mod=spacecp&ac=share&type=article&id=$article[aid]&handlekey=sharearticlehk_{$article[aid]}" id="a_share" onclick="showWindow(this.id, this.href, 'get', 0);" class="oshr">{lang share}</a>
-                <!--{/if}-->
-                <a href="misc.php?mod=invite&action=article&id=$article[aid]" id="a_invite" onclick="showWindow('invite', this.href, 'get', 0);" class="oshr oivt">{lang invite}</a>
+                
                 <!--{if $_G['group']['allowmanagearticle'] || ($_G['group']['allowpostarticle'] && $article['uid'] == $_G['uid'] && (empty($_G['group']['allowpostarticlemod']) || $_G['group']['allowpostarticlemod'] && $article['status'] == 1)) || $categoryperm[$value['catid']]['allowmanage']}-->
                     <a href="portal.php?mod=portalcp&ac=article&op=edit&aid=$article[aid]">{lang edit}</a><span class="pipe">|</span>
                     <a  id="related_article" href="portal.php?mod=portalcp&ac=related&aid=$article[aid]&catid=$article[catid]&update=1" onclick="showWindow(this.id, this.href, 'get', 0);return false;">{lang article_related}</a><span class="pipe">|</span>

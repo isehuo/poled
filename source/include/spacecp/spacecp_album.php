@@ -178,7 +178,7 @@ if($_GET['op'] == 'edit') {
 			if($value == $_GET['oldtitle'][$picid]) {
 				continue;
 			}
-			$title = getstr($value, 150);
+			$title = getstr($value, 250);
 			$title = censor($title);
 			if(censormod($title) || $_G['group']['allowuploadmod']) {
 				$pic_status = 1;

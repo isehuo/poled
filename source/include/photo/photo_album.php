@@ -21,7 +21,7 @@ if($page<1) $page=1;
 loadcache('albumcategory');
 $category = $_G['cache']['albumcategory'];
 
-$perpage = 2;
+$perpage = 12;
 $perpage = mob_perpage($perpage);
 
 $start = ($page-1)*$perpage;
