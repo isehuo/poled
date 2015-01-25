@@ -44,7 +44,7 @@
         <!--{/if}-->
         <div id="toptb" class="cl">
             <!--{hook/global_cpnav_top}-->
-            <div class="wp">
+            <div class="container">
                 <div class="z">
                     <!--{loop $_G['setting']['topnavs'][0] $nav}-->
                         <!--{if $nav['available'] && (!$nav['level'] || ($nav['level'] == 1 && $_G['uid']) || ($nav['level'] == 2 && $_G['adminid'] > 0) || ($nav['level'] == 3 && $_G['adminid'] == 1))}-->$nav[code]<!--{/if}-->
@@ -103,16 +103,14 @@
         <!--{/if}-->
 
         <!--{ad/headerbanner/wp a_h}-->
-        <div id="hd" class="cl">
-            <div class="wp">
-                <!--{eval $mnid = getcurrentnav();}-->
-                <h2><!--{if !isset($_G['setting']['navlogos'][$mnid])}--><a href="{if $_G['setting']['domain']['app']['default']}http://{$_G['setting']['domain']['app']['default']}/{else}./{/if}" title="$_G['setting']['bbname']">{$_G['style']['boardlogo']}</a><!--{else}-->$_G['setting']['navlogos'][$mnid]<!--{/if}--></h2>
-                <ul id="nv">
-                    <!--{loop $_G['setting']['navs'] $nav}-->
-                        <!--{if $nav['available'] && (!$nav['level'] || ($nav['level'] == 1 && $_G['uid']) || ($nav['level'] == 2 && $_G['adminid'] > 0) || ($nav['level'] == 3 && $_G['adminid'] == 1))}--><li {if $mnid == $nav[navid]}class="a" {/if}$nav[nav]></li><!--{/if}-->
-                    <!--{/loop}-->
-                </ul>
-            </div>
+        <div id="hd" class="container">
+            <!--{eval $mnid = getcurrentnav();}-->
+            <h2><!--{if !isset($_G['setting']['navlogos'][$mnid])}--><a href="{if $_G['setting']['domain']['app']['default']}http://{$_G['setting']['domain']['app']['default']}/{else}./{/if}" title="$_G['setting']['bbname']">{$_G['style']['boardlogo']}</a><!--{else}-->$_G['setting']['navlogos'][$mnid]<!--{/if}--></h2>
+            <ul id="nv">
+                <!--{loop $_G['setting']['navs'] $nav}-->
+                    <!--{if $nav['available'] && (!$nav['level'] || ($nav['level'] == 1 && $_G['uid']) || ($nav['level'] == 2 && $_G['adminid'] > 0) || ($nav['level'] == 3 && $_G['adminid'] == 1))}--><li {if $mnid == $nav[navid]}class="a" {/if}$nav[nav]></li><!--{/if}-->
+                <!--{/loop}-->
+            </ul>
         </div>
         <!--{hook/global_header}-->
     <!--{/if}-->
@@ -120,4 +118,4 @@
         <script type="text/javascript" src="{$_G[setting][jspath]}jquery.1.9.1.js"></script>
         <!--{subtemplate portal/focus}-->
     <!--{/if}-->
-    <div id="wp" class="wp">
+    <div id="wp" class="container">

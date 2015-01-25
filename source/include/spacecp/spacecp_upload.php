@@ -38,21 +38,7 @@ if(submitcheck('albumsubmit') && helper_access::check_module('album')) {
 		$_POST['friend'] = intval($_POST['friend']);
 
 		$_POST['target_ids'] = '';
-		if($_POST['friend'] == 2) {
-			$uids = array();
-			$names = empty($_POST['target_names']) ? array() : explode(' ', str_replace(array(lang('spacecp', 'tab_space'), "\r\n", "\n", "\r"), ' ', $_POST['target_names']));
-			if($names) {
-				$uids = C::t('common_member')->fetch_all_uid_by_username($names);
-			}
-			if(empty($uids)) {
-				$_POST['friend'] = 3;
-			} else {
-				$_POST['target_ids'] = implode(',', $uids);
-			}
-		} elseif($_POST['friend'] == 4) {
-			$_POST['password'] = trim($_POST['password']);
-			if($_POST['password'] == '') $_POST['friend'] = 0;
-		}
+		
 		if($_POST['friend'] !== 2) {
 			$_POST['target_ids'] = '';
 		}

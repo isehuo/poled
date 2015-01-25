@@ -447,15 +447,6 @@ CSS 写作注意事项：
     .lb { margin-right: 20px; }
 
 
-/*
-    Name:            mod_narrow_input
-    Level:            Global
-    Sample:            <div class="pns"></div>
-    Explain:        小尺寸的输入框和按钮样式。该样式在模板中保留，目前样式为空。
-    Last Modify:    Pony
-*/
-    .pns .px {}
-    .pns .pn {}
 
 /*
     Name:            mod_float_typeid

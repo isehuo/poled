@@ -1,4 +1,5 @@
 .DS_Store
+README.md
 node_modules
 Thumbs.db
 .git/
@@ -30,7 +31,6 @@ search.php
 static/
 source/admincp/
 source/archiver/
-source/class/
 source/discuz_version.php
 source/index.htm
 source/language/
