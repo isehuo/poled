@@ -8,7 +8,7 @@
         <!--{if $album['catname']}-->
             <a href="photo.php?do=album&catid=$album[catid]&page=1">$album[catname]</a> <em>&rsaquo;</em>
          <!--{/if}-->
-         <a href="photo.php?do={$do}&aid=$album[albumid]&picid=0">$album[albumname]</a>
+         <a href="photo.php?do={$do}&picid=$album[picid]">$album[albumname]</a>
     </div>
 </div>
 
@@ -26,22 +26,22 @@
                 
                 <div class="tbmu" id="pic_block">
                     <div class="y">
-                        [ $album[picnum] ] <a href="photo.php?do=$do&aid=$album[albumid]&picid=$upid" id="J-prevLink">上一张</a><span class="pipe">|</span>
-                        <a href="photo.php?do=$do&aid=$album[albumid]&picid=$nextid" id="J-nextLink">下一张</a><span class="pipe">|</span>
+                        [ $album[picnum] ] <a href="photo.php?do=$do&picid=$upid" id="J-prevLink">上一张</a><span class="pipe">|</span>
+                        <a href="photo.php?do=$do&picid=$nextid" id="J-nextLink">下一张</a><span class="pipe">|</span>
                     </div>
                 </div>
                 
                 <div class="vw pic">
                     <div id="photo_pic" class="c">
-                        <a href="photo.php?do=$do&aid=$album[albumid]&picid=$nextid"><img src="$pic[pic]" id="pic" alt="$pic[title]" /></a> 
+                        <a href="photo.php?do=$do&picid=$nextid"><img src="$pic[pic]" id="pic" alt="$pic[title]" /></a> 
                     </div>
                     <!--{if $pic[title]}--><p>$pic[title]</p><!--{/if}-->
                     <div class="pns mlnv vm mtm cl">
-                        <a href="photo.php?do=$do&aid=$album[albumid]&picid=$upid&goto=up" class="btn" title="{lang previous_pic}"><img src="{STATICURL}image/common/pic_nv_prev.gif" alt="{lang previous_pic}"/></a>
+                        <a href="photo.php?do=$do&picid=$upid&goto=up" class="btn" title="{lang previous_pic}"><img src="{STATICURL}image/common/pic_nv_prev.gif" alt="{lang previous_pic}"/></a>
                         <!--{loop $piclist $value}-->
-                            <a href="photo.php?do=$do&aid=$album[albumid]&picid=$value[picid]"><img alt="" src="$value[pic]"{if $value[picid]==$picid} class="a"{/if} /></a>
+                            <a href="photo.php?do=$do&picid=$value[picid]"><img alt="" src="$value[pic]"{if $value[picid]==$picid} class="a"{/if} /></a>
                         <!--{/loop}-->
-                        <a href="photo.php?do=$do&aid=$album[albumid]&picid=$nextid" class="btn" title="{lang next_pic}"><img src="{STATICURL}image/common/pic_nv_next.gif" alt="{lang next_pic}"/></a>
+                        <a href="photo.php?do=$do&picid=$nextid" class="btn" title="{lang next_pic}"><img src="{STATICURL}image/common/pic_nv_next.gif" alt="{lang next_pic}"/></a>
                     </div>
                 </div>
                 <!--[diy=diyclicktop]--><div id="diyclicktop" class="area"></div><!--[/diy]-->
@@ -50,7 +50,7 @@
                 <div id="pic_comment" class="bm bw0 mtm mbm">
                     <h3 class="pbn bbs">
                         <!--{if !empty($list)}-->
-                            <a href="photo.php?do=$do&aid=$album[albumid]&picid=$pic[picid]#quickcommentform_{$picid}" onclick="if($('comment_message')){$('comment_message').focus();return false;}" class="y xi2 xw0">发表评论</a>
+                            <a href="photo.php?do=$do&picid=$pic[picid]#quickcommentform_{$picid}" onclick="if($('comment_message')){$('comment_message').focus();return false;}" class="y xi2 xw0">发表评论</a>
                         <!--{/if}-->
                         评论
                     </h3>

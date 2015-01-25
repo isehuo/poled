@@ -1379,8 +1379,10 @@ function rewritedata($alldata = 1) {
 			$data['replace']['photo_album'] = "rewriteoutput('photo_album', 0, '\\1', '\\3', '\\5', '\\6')";
 		}
 		if(in_array('photo_pic', $_G['setting']['rewritestatus'])) {
-			$data['search']['photo_pic'] = "/".$_G['domain']['pregxprw']['photo']."\?do\=pic&(amp;)?aid\=(\d+)&(amp;)?picid\=(\d+)(#\w+)?\"([^\>]*)\>/e";
-			$data['replace']['photo_pic'] = "rewriteoutput('photo_pic', 0, '\\1', '\\3', '\\5', '\\6', '\\7')";
+			// $data['search']['photo_pic'] = "/".$_G['domain']['pregxprw']['photo']."\?do\=pic&(amp;)?aid\=(\d+)&(amp;)?picid\=(\d+)(#\w+)?\"([^\>]*)\>/e";
+			// $data['replace']['photo_pic'] = "rewriteoutput('photo_pic', 0, '\\1', '\\3', '\\5', '\\6', '\\7')";
+			$data['search']['photo_pic'] = "/".$_G['domain']['pregxprw']['photo']."\?do\=pic&(amp;)?picid\=(\d+)(#\w+)?\"([^\>]*)\>/e";
+			$data['replace']['photo_pic'] = "rewriteoutput('photo_pic', 0, '\\1', '\\3', '\\4', '\\5', '\\6')";
 		}
 	} else {
 		$data['rulesearch']['portal_topic'] = 'topic-{name}.html';

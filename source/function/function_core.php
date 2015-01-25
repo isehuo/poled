@@ -972,9 +972,13 @@ function rewriteoutput($type, $returntype, $host) {
 			'{page}' => $page ? $page : 1,
 		);
 	} elseif($type == 'photo_pic') {
-		list(,,, $aid, $picid, $param, $extra) = func_get_args();
+		// list(,,, $aid, $picid, $param, $extra) = func_get_args();
+		// $r = array(
+		// 	'{aid}' => $aid,
+		// 	'{picid}' => $picid ? $picid : 0,
+		// );
+		list(,,, $picid, $param, $extra) = func_get_args();
 		$r = array(
-			'{aid}' => $aid,
 			'{picid}' => $picid ? $picid : 0,
 		);
 		if($param) {
