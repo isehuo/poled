@@ -63,6 +63,7 @@ function album_update_pic($albumid, $picid=0) {
 	if(!$pic = $query[0]) {
 		return false;
 	}
+	$setarr['picid'] = $picid ? $picid : $pic['picid'];
 	$from = $pic['remote'];
 	$pic['remote'] = $pic['remote'] > 1 ? $pic['remote'] - 2 : $pic['remote'];
 	$basedir = !getglobal('setting/attachdir') ? (DISCUZ_ROOT.'./data/attachment/') : getglobal('setting/attachdir');
